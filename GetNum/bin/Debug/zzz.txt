@@ -1,0 +1,10 @@
+cd C:\Users\Koosha\source\repos\GetNum\GetNum\bin\Debug
+
+sqlite3 library.db
+
+.header on
+.mode table
+
+ select * from devicefeedlog
+
+CREATE VIEW DeviceInfoFeedView AS SELECT    DeviceInfoTable.serialnum, DeviceInfoTable.ownername,     DeviceInfoTable.address,    DeviceFeedLog.energy, DeviceFeedLog.Date FROM     DeviceInfoTable INNER JOIN     DeviceFeedLog ON     DeviceInfoTable.simnum =deviceFeedLog.simnum;
