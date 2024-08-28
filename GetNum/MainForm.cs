@@ -202,10 +202,12 @@ namespace GetNum
         }
         private void ChekingError(string[,] DataInDB, int[] TodayEnergy)
         {
+
             string connectionString = "Data Source=library.db;Version=3;";
+
             string GetSimNumQuery = "SELECT SimNum , SID FROM DeviceInfoTable";
             List<string> AllSimList = new List<string>();
-            List<string> SidList = new List<string>();
+            List<string> SidList = new List<string>(); 
             string[,] StatArr = new string[SidList.Count, 3];
             List<string> ResSimList = new List<string>();
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
