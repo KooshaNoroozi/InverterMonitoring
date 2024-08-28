@@ -203,6 +203,8 @@ namespace GetNum
         private void ChekingError(string[,] DataInDB, int[] TodayEnergy)
         {
 
+
+
             string connectionString = "Data Source=library.db;Version=3;";
 
             string GetSimNumQuery = "SELECT SimNum , SID FROM DeviceInfoTable";
