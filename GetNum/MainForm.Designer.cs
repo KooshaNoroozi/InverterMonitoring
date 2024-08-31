@@ -35,7 +35,7 @@
             this.RecieveTextBox = new System.Windows.Forms.TextBox();
             this.RunBTN = new System.Windows.Forms.Button();
             this.RegisterBTN = new System.Windows.Forms.Button();
-            this.ListOfInv = new System.Windows.Forms.ListView();
+            ListOfInv = new System.Windows.Forms.ListView();
             this.StatusIcon = new System.Windows.Forms.ImageList(this.components);
             this.CmpBTN = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -89,23 +89,23 @@
             // 
             // ListOfInv
             // 
-            this.ListOfInv.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.ListOfInv.AllowColumnReorder = true;
-            this.ListOfInv.CheckBoxes = true;
-            this.ListOfInv.FullRowSelect = true;
-            this.ListOfInv.HideSelection = false;
-            this.ListOfInv.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ListOfInv.Location = new System.Drawing.Point(338, 105);
-            this.ListOfInv.Margin = new System.Windows.Forms.Padding(4);
-            this.ListOfInv.MultiSelect = false;
-            this.ListOfInv.Name = "ListOfInv";
-            this.ListOfInv.Size = new System.Drawing.Size(922, 316);
-            this.ListOfInv.SmallImageList = this.StatusIcon;
-            this.ListOfInv.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.ListOfInv.TabIndex = 32;
-            this.ListOfInv.UseCompatibleStateImageBehavior = false;
-            this.ListOfInv.View = System.Windows.Forms.View.Details;
-            this.ListOfInv.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ListOfInv_ColumnClick);
+            ListOfInv.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            ListOfInv.AllowColumnReorder = true;
+            ListOfInv.CheckBoxes = true;
+            ListOfInv.FullRowSelect = true;
+            ListOfInv.HideSelection = false;
+            ListOfInv.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            ListOfInv.Location = new System.Drawing.Point(338, 105);
+            ListOfInv.Margin = new System.Windows.Forms.Padding(4);
+            ListOfInv.MultiSelect = false;
+            ListOfInv.Name = "ListOfInv";
+            ListOfInv.Size = new System.Drawing.Size(922, 316);
+            ListOfInv.SmallImageList = this.StatusIcon;
+            ListOfInv.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            ListOfInv.TabIndex = 32;
+            ListOfInv.UseCompatibleStateImageBehavior = false;
+            ListOfInv.View = System.Windows.Forms.View.Details;
+            ListOfInv.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ListOfInv_ColumnClick);
             // 
             // StatusIcon
             // 
@@ -169,7 +169,7 @@
             this.Controls.Add(this.SearchBox);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.CmpBTN);
-            this.Controls.Add(this.ListOfInv);
+            this.Controls.Add(ListOfInv);
             this.Controls.Add(this.RegisterBTN);
             this.Controls.Add(this.RunBTN);
             this.Controls.Add(this.RecieveTextBox);
@@ -193,7 +193,7 @@
         private System.Windows.Forms.Button CmpBTN;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox SearchBox;
-        public System.Windows.Forms.ListView ListOfInv;
+        public static System.Windows.Forms.ListView ListOfInv;
         private System.Windows.Forms.Button deleteinvBTN;
         private System.Windows.Forms.ImageList StatusIcon;
     }

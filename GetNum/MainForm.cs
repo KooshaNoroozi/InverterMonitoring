@@ -8,25 +8,66 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
 
 namespace GetNum
 {
 
     public partial class MainForm : Form
     {
+        private System.Threading.Timer _timer;
+        private DateTime _targetTime;
         private Thread ReadThread;
         private Thread RunThread;
+        public static Thread monitoringThread;
         private Thread ParseThread;
         public SerialPort _serialPort;
         public string Buffer = null;
+        public static int RefreshFlag = 0;
         public MainForm()
         {
             InitializeComponent();
+            OpeningPort();
+            _targetTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 17,12 , 0); // Set target time to 2:00 PM
+            _timer = new System.Threading.Timer(CheckTime, null, 0, 60000); // Check every minute
+            InitializeThreads();
             InitializeListOfInverter();
             LoadData();
-            OpeningPort();
-            InitializeThreads();
+           
+            
             ListOfInv.MouseDoubleClick += new MouseEventHandler(ListOfInv_MouseDoubleClick);
+        }
+        private void UpdateListView()
+        {
+            if (ListOfInv.InvokeRequired)
+            {
+                ListOfInv.Invoke(new Action(UpdateListView));
+            }
+            else
+            {
+                // Your logic to update the ListView
+                InitializeListOfInverter();
+            }
+        }
+        private void MonitorFlag()
+        {
+            while (true)
+            {
+                if (RefreshFlag == 1)
+                {
+                    UpdateListView();
+                    RefreshFlag = 0; // Reset the flag
+                }
+                Thread.Sleep(100); // Check every 100 milliseconds
+            }
+        }
+        private void CheckTime(object state)
+        {
+            if (DateTime.Now >= _targetTime && DateTime.Now < _targetTime.AddMinutes(1))
+            {
+                RunThread.Start();
+            }
+            
         }
         private void OpeningPort()
         {
@@ -60,7 +101,7 @@ namespace GetNum
                 SingleInverterForm.ShowDialog();
             }
         }
-        private void LoadData()
+        public static void LoadData()
         {
             ListOfInv.Items.Clear();//clearing previous list to creating new one
             string connectionString = "Data Source=library.db;Version=3;";
@@ -129,7 +170,7 @@ namespace GetNum
             }
         }
         
-        private void InitializeListOfInverter()
+        public static void InitializeListOfInverter()
         {
             
             ListOfInv.Columns.Clear();
@@ -141,7 +182,7 @@ namespace GetNum
             ListOfInv.Columns.Add("SID", 50, HorizontalAlignment.Center);
             ListOfInv.Columns.Add("Serial Number", 90, HorizontalAlignment.Center);
             ListOfInv.Columns.Add("Name", 150, HorizontalAlignment.Center);
-            ListOfInv.Columns.Add("Status", 75, HorizontalAlignment.Center);
+            ListOfInv.Columns.Add("Status", 90, HorizontalAlignment.Center);
             ListOfInv.Columns.Add("Avrage Energy", 90 , HorizontalAlignment.Center);
             ListOfInv.Columns.Add("Total Energy", 90, HorizontalAlignment.Center);
             ListOfInv.Columns.Add("Address", 250, HorizontalAlignment.Right);
@@ -176,9 +217,13 @@ namespace GetNum
             ReadThread.Start();
 
             // Initialize and start the Run thread
-            RunThread = new Thread(SendingMessage);
+            RunThread = new Thread(RunningMethod);
             RunThread.IsBackground = true;
-            //  RunThread.Start();
+
+            monitoringThread = new Thread(MonitorFlag);
+            monitoringThread.IsBackground = true;
+            monitoringThread.Start();
+
 
             //Initialize and start the parsing thraed
             ParseThread = new Thread(ParsingMethod);
@@ -209,8 +254,8 @@ namespace GetNum
 
             string GetSimNumQuery = "SELECT SimNum , SID FROM DeviceInfoTable";
             List<string> AllSimList = new List<string>();
-            List<string> SidList = new List<string>(); 
-            string[,] StatArr = new string[SidList.Count, 3];
+            List<string> SidList = new List<string>();
+            
             List<string> ResSimList = new List<string>();
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
@@ -226,11 +271,13 @@ namespace GetNum
                     }
                 }
             }
-            for (int i = 0; i < DataInDB.Length; i++)
+            string[,] StatArr = new string[SidList.Count, 3];
+                        
+            for (int i = 0; i < DataInDB.GetLength(0); i++)
             {
                 ResSimList.Add(DataInDB[i, 0]);
             }
-            for (int i=0; i< SidList.Count;i++ )  
+            for (int i = 0; i < SidList.Count; i++)
             {
                 StatArr[i, 0] = SidList[i];
             }
@@ -244,11 +291,11 @@ namespace GetNum
                 int index = ResSimList.IndexOf(AllSimList[i]);
                 if (index != -1)// contians the number
                 {
-                    if(TodayEnergy[index] < 10)
+                    if (TodayEnergy[index] < 10)
                     {
                         StatArr[i, 2] = "Warning";
                     }
-                    else 
+                    else
                     {
                         StatArr[i, 2] = "OK";
                     }
@@ -258,39 +305,41 @@ namespace GetNum
                     StatArr[i, 2] = "Fail";
                 }
             }
-            
+
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
-                
+
                 connection.Open();
                 string InsStatusQuery;
                 DateTime currentDate = DateTime.Today;
                 string today = currentDate.ToString("yyyy-MM-dd");
-                for (int i = 0; i < StatArr.Length; i++)
+                for (int i = 0; i < StatArr.GetLength(0); i++)
                 {
-                    if (StatArr[i,2]=="OK")
+                    if (StatArr[i, 2] == "OK")
                     {
-                        InsStatusQuery = " update DeviceTodayFeed set status ='@status' where (sid=@OKsid);";
+                        InsStatusQuery = " update DeviceTodayFeed set status =@status where (sid=@OKsid And date=@date );";
                         using (SQLiteCommand command = new SQLiteCommand(InsStatusQuery, connection))
                         {
-                            command.Parameters.AddWithValue("@OKsid", StatArr[i,0]);
+                            command.Parameters.AddWithValue("@OKsid", StatArr[i, 0]);
                             command.Parameters.AddWithValue("@status", StatArr[i, 2]);
+                            command.Parameters.AddWithValue("@date", today);
                             command.ExecuteNonQuery();
                         }
                     }
                     if (StatArr[i, 2] == "Warning")
                     {
-                        InsStatusQuery = " update DeviceTodayFeed set status ='@status' where (sid=@Warningsid);";
+                        InsStatusQuery = " update DeviceTodayFeed set status =@status where (sid=@Warningsid And date=@date);";
                         using (SQLiteCommand command = new SQLiteCommand(InsStatusQuery, connection))
                         {
                             command.Parameters.AddWithValue("@Warningsid", StatArr[i, 0]);
                             command.Parameters.AddWithValue("@status", StatArr[i, 2]);
+                            command.Parameters.AddWithValue("@date", today);
                             command.ExecuteNonQuery();
                         }
                     }
                     if (StatArr[i, 2] == "Fail")
                     {
-                        InsStatusQuery = "INSERT INTO DeviceTodayFeed (sid, energy, date, status) VALUES (@sid, 0 , '@date', '@status');";
+                        InsStatusQuery = "INSERT INTO DeviceTodayFeed (sid, energy, date, status) VALUES (@sid, 0 , @date, @status);";
                         using (SQLiteCommand command = new SQLiteCommand(InsStatusQuery, connection))
                         {
                             command.Parameters.AddWithValue("@sid", StatArr[i, 0]);
@@ -301,15 +350,18 @@ namespace GetNum
                     }
 
                 }
-                
-               
+
+
             }
 
         }
         private void InsertInDataBase(string[,] DataInDB)
         {
-            int[] YesterdayEnergy = new int[DataInDB.Length];
-            int[] TodayEnergy = new int[DataInDB.Length];
+            
+            int[] YesterdayEnergy = new int[DataInDB.GetLength(0)];
+            int[] TodayEnergy = new int[DataInDB.GetLength(0)];
+            
+            string simnum;
             string connectionString = "Data Source=library.db;Version=3;";
             using (SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
@@ -327,21 +379,24 @@ namespace GetNum
                     DateTime currentDate = DateTime.Today;
                     string today = currentDate.ToString("yyyy-MM-dd");
 
-                    for (int i = 0; i < DataInDB.Length; i++)
+                    for (int i = 0; i < DataInDB.GetLength(0); i++)
                     {
-                        string simnum = DataInDB[i, 0];
+
+                        
+                        simnum = DataInDB[i, 0];
+                        
                         string selectSidQuery = $"SELECT sid FROM deviceinfotable WHERE simnum = '{simnum}'";
                         using (var command = new SQLiteCommand(selectSidQuery, connection))
                         {
                             int sid = Convert.ToInt32(command.ExecuteScalar());
 
                             // Insert new row into devicefeedlog
-                            string insertDataQuery = "INSERT INTO devicefeedlog (sid, energy, date) VALUES (@sid, @energy, '@date')";
+                            string insertDataQuery = "INSERT INTO devicefeedlog (sid, energy, date) VALUES (@sid, @energy, @date)";
                             using (var insertCommand = new SQLiteCommand(insertDataQuery, connection))
                             {
-                                insertCommand.Parameters.AddWithValue("@SID", sid);
-                                insertCommand.Parameters.AddWithValue("@Energy", DataInDB[i, 1]);
-                                insertCommand.Parameters.AddWithValue("@Date", today);
+                                insertCommand.Parameters.AddWithValue("@sid", sid);
+                                insertCommand.Parameters.AddWithValue("@energy", DataInDB[i, 1]);
+                                insertCommand.Parameters.AddWithValue("@date", today);
                                 insertCommand.ExecuteNonQuery();
                             }
 
@@ -364,9 +419,9 @@ namespace GetNum
                     today = currentDate.ToString("yyyy-MM-dd");
                     string yesterday = (currentDate.AddDays(-1)).ToString("yyyy-MM-dd");
                     
-                    for (int i = 0; i < DataInDB.Length; i++)
+                    for (int i = 0; i < DataInDB.GetLength(0); i++)
                     {
-                        string simnum = DataInDB[i, 0];
+                        simnum = DataInDB[i, 0];
                         string selectSidQuery = $"SELECT sid FROM deviceinfotable WHERE simnum = '{simnum}'";
                         using (var command = new SQLiteCommand(selectSidQuery, connection))
                         {
@@ -382,7 +437,7 @@ namespace GetNum
                             }
                         }
                     }
-                    for (int i = 0; i < DataInDB.Length; i++)
+                    for (int i = 0; i < DataInDB.GetLength(0); i++)
                     {
                         TodayEnergy[i] = Convert.ToInt32(DataInDB[i, 1]) - YesterdayEnergy[i];
                     }
@@ -390,20 +445,20 @@ namespace GetNum
 
 
 
-                    for (int i = 0; i < DataInDB.Length; i++)
+                    for (int i = 0; i < DataInDB.GetLength(0); i++)
                     {
-                        string simnum = DataInDB[i, 0];
+                        simnum = DataInDB[i, 0];
                         string selectSidQuery = $"SELECT sid FROM deviceinfotable WHERE simnum = '{simnum}'";
                         using (var command = new SQLiteCommand(selectSidQuery, connection))
                         {
                             int sid = Convert.ToInt32(command.ExecuteScalar());
                             // Insert new row into devicefeedlog
-                            string insertDataQuery = "INSERT INTO DeviceTodayFeed (sid, energy, date) VALUES (@sid, @energy, '@date')";
+                            string insertDataQuery = "INSERT INTO DeviceTodayFeed (sid, energy, date) VALUES (@sid, @energy, @date)";
                             using (var insertCommand = new SQLiteCommand(insertDataQuery, connection))
                             {
-                                insertCommand.Parameters.AddWithValue("@SID", sid);
-                                insertCommand.Parameters.AddWithValue("@Energy", TodayEnergy[i]);
-                                insertCommand.Parameters.AddWithValue("@Date", today);
+                                insertCommand.Parameters.AddWithValue("@sid", sid);
+                                insertCommand.Parameters.AddWithValue("@energy", TodayEnergy[i]);
+                                insertCommand.Parameters.AddWithValue("@date", today);
                                 insertCommand.ExecuteNonQuery();
                             }
                         }
@@ -417,6 +472,10 @@ namespace GetNum
 
            
             ChekingError(DataInDB, TodayEnergy);
+            RunThread.Abort();
+            ReadThread.Abort();
+            ParseThread.Abort();
+
 
         }
         private string[,] CreateArray(string[] Messages)
@@ -558,26 +617,47 @@ namespace GetNum
             try
             {
                 _serialPort.WriteLine("AT+CMGD=0,4\r"); // delete pre sms
-                Thread.Sleep(200);
+                Thread.Sleep(400);
 
                 _serialPort.WriteLine("AT+CMGF=1\r"); // Set SMS text mode
-                Thread.Sleep(200);
+                Thread.Sleep(400);
 
                 _serialPort.WriteLine("AT+CPMS=\"SM\"\r"); // Select SIM storage
-                Thread.Sleep(200);
+                Thread.Sleep(400);
 
                 _serialPort.WriteLine("AT+CNMI=2,2,0,0,0\r");
-                Thread.Sleep(200);
+                Thread.Sleep(400);
 
                 // Read a specific message (example: message at index 1)
-                _serialPort.WriteLine("AT+CMGR=1\r");
-                Thread.Sleep(200);
+               // _serialPort.WriteLine("AT+CMGR=1\r");
+                Thread.Sleep(500);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error: {ex.Message}");
             }
 
+        }
+        public void RunningMethod()
+        {
+            try
+            {
+                SendingMessage();
+                while (true)
+                {
+                    // Keep the thread alive
+                    Thread.Sleep(200);
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                Console.WriteLine("ThreadAbortException caught. Cleaning up...");
+            }
+            finally
+            {
+                RefreshFlag = 1;
+            }
+            
         }
         private void SendingMessage()
         {
@@ -625,9 +705,9 @@ namespace GetNum
             //initializing the sms procedure
 
             _serialPort.WriteLine("AT+CMGF=1\r"); // Set SMS text mode
-            Thread.Sleep(200);
+            Thread.Sleep(400);
             _serialPort.WriteLine("AT+CSCS=\"GSM\"" + '\r');
-            Thread.Sleep(200);
+            Thread.Sleep(400);
 
 
 
@@ -638,14 +718,15 @@ namespace GetNum
 
             //sending batch messages
             Thread.Sleep(2000);
+            ParseThread.Start();
             foreach (var item in ListOfNumbers)
             {
                 if (_serialPort.IsOpen)
                 {
                     _serialPort.WriteLine("AT+CMGS=" + "\"" + item + "\"" + '\r');
-                    Thread.Sleep(300);
+                    Thread.Sleep(400);
                     _serialPort.WriteLine(QuestionEnergyHighWord + (char)26 + '\r');
-                    Thread.Sleep(300);
+                    Thread.Sleep(400);
 
                 }
                 else
@@ -687,13 +768,9 @@ namespace GetNum
                 }
                 Thread.Sleep(5000);
 
-            }  
-            ParseThread.Start();
-            while (true)
-            {
-                // Keep the thread alive
-                Thread.Sleep(200);
             }
+            RunThread.Abort();
+            
         }
         private void RunBTN_Click(object sender, EventArgs e)
         {
@@ -707,6 +784,7 @@ namespace GetNum
             _serialPort.Close();
             ReadThread.Abort();
             RunThread.Abort();
+            ParseThread.Abort();
            
         }
         private void CmpBTN_Click(object sender, EventArgs e)

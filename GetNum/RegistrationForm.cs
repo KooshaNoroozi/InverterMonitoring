@@ -115,7 +115,7 @@ namespace GetNum
                         createTableCmd.ExecuteNonQuery();
                     }
 
-                    insertDataQuery = "INSERT INTO DevicetodayFeed (SID, Energy, Date) VALUES (@SID, 0 , @yesterday )";
+                    insertDataQuery = "INSERT INTO DevicetodayFeed (SID, Energy, Date, status) VALUES (@SID, 0 , @yesterday, 'Recently Added' )";
                     using (SQLiteCommand insertDataCmd = new SQLiteCommand(insertDataQuery, connection))
                     {
                         insertDataCmd.Parameters.AddWithValue("@SID", sid);
