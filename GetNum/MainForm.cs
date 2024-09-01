@@ -28,7 +28,7 @@ namespace GetNum
         {
             InitializeComponent();
             OpeningPort();
-            _targetTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 17,12 , 0); // Set target time to 2:00 PM
+            _targetTime = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 13 ,40 , 0); // Set target time to 2:00 PM
             _timer = new System.Threading.Timer(CheckTime, null, 0, 60000); // Check every minute
             InitializeThreads();
             InitializeListOfInverter();
@@ -169,7 +169,6 @@ namespace GetNum
 
             }
         }
-        
         public static void InitializeListOfInverter()
         {
             
@@ -193,7 +192,6 @@ namespace GetNum
 
 
         }
-
         private class ListViewItemComparer : IComparer
         {
             private readonly int columnIndex;
@@ -291,13 +289,18 @@ namespace GetNum
                 int index = ResSimList.IndexOf(AllSimList[i]);
                 if (index != -1)// contians the number
                 {
-                    if (TodayEnergy[index] < 10)
+                    
+                    if (TodayEnergy[index] != -1 && TodayEnergy[index] < 10)
                     {
                         StatArr[i, 2] = "Warning";
                     }
-                    else
+                    else if(TodayEnergy[index] != -1 && TodayEnergy[index] > 10)
                     {
                         StatArr[i, 2] = "OK";
+                    }
+                    else if (TodayEnergy[index] == -1 )
+                    {
+                        StatArr[i, 2] = "Fail";
                     }
                 }
                 else // this number not responses
@@ -381,27 +384,26 @@ namespace GetNum
 
                     for (int i = 0; i < DataInDB.GetLength(0); i++)
                     {
-
-                        
-                        simnum = DataInDB[i, 0];
-                        
-                        string selectSidQuery = $"SELECT sid FROM deviceinfotable WHERE simnum = '{simnum}'";
-                        using (var command = new SQLiteCommand(selectSidQuery, connection))
+                        if (DataInDB[i, 1] != "-1")
                         {
-                            int sid = Convert.ToInt32(command.ExecuteScalar());
+                            simnum = DataInDB[i, 0];
 
-                            // Insert new row into devicefeedlog
-                            string insertDataQuery = "INSERT INTO devicefeedlog (sid, energy, date) VALUES (@sid, @energy, @date)";
-                            using (var insertCommand = new SQLiteCommand(insertDataQuery, connection))
+                            string selectSidQuery = $"SELECT sid FROM deviceinfotable WHERE simnum = '{simnum}'";
+                            using (var command = new SQLiteCommand(selectSidQuery, connection))
                             {
-                                insertCommand.Parameters.AddWithValue("@sid", sid);
-                                insertCommand.Parameters.AddWithValue("@energy", DataInDB[i, 1]);
-                                insertCommand.Parameters.AddWithValue("@date", today);
-                                insertCommand.ExecuteNonQuery();
+                                int sid = Convert.ToInt32(command.ExecuteScalar());
+
+                                // Insert new row into devicefeedlog
+                                string insertDataQuery = "INSERT INTO devicefeedlog (sid, energy, date) VALUES (@sid, @energy, @date)";
+                                using (var insertCommand = new SQLiteCommand(insertDataQuery, connection))
+                                {
+                                    insertCommand.Parameters.AddWithValue("@sid", sid);
+                                    insertCommand.Parameters.AddWithValue("@energy", DataInDB[i, 1]);
+                                    insertCommand.Parameters.AddWithValue("@date", today);
+                                    insertCommand.ExecuteNonQuery();
+                                }
                             }
-
                         }
-
                     }
 
 
@@ -440,28 +442,38 @@ namespace GetNum
                     for (int i = 0; i < DataInDB.GetLength(0); i++)
                     {
                         TodayEnergy[i] = Convert.ToInt32(DataInDB[i, 1]) - YesterdayEnergy[i];
+                        if (DataInDB[i, 1] != "-1")
+                        {
+                            TodayEnergy[i] = -1;
+                        }
                     }
 
+                        
 
 
 
                     for (int i = 0; i < DataInDB.GetLength(0); i++)
                     {
-                        simnum = DataInDB[i, 0];
-                        string selectSidQuery = $"SELECT sid FROM deviceinfotable WHERE simnum = '{simnum}'";
-                        using (var command = new SQLiteCommand(selectSidQuery, connection))
+                        if (DataInDB[i, 1] != "-1")
                         {
-                            int sid = Convert.ToInt32(command.ExecuteScalar());
-                            // Insert new row into devicefeedlog
-                            string insertDataQuery = "INSERT INTO DeviceTodayFeed (sid, energy, date) VALUES (@sid, @energy, @date)";
-                            using (var insertCommand = new SQLiteCommand(insertDataQuery, connection))
+                            simnum = DataInDB[i, 0];
+                            string selectSidQuery = $"SELECT sid FROM deviceinfotable WHERE simnum = '{simnum}'";
+                            using (var command = new SQLiteCommand(selectSidQuery, connection))
                             {
-                                insertCommand.Parameters.AddWithValue("@sid", sid);
-                                insertCommand.Parameters.AddWithValue("@energy", TodayEnergy[i]);
-                                insertCommand.Parameters.AddWithValue("@date", today);
-                                insertCommand.ExecuteNonQuery();
+                                int sid = Convert.ToInt32(command.ExecuteScalar());
+                                // Insert new row into devicefeedlog
+                                string insertDataQuery = "INSERT INTO DeviceTodayFeed (sid, energy, date) VALUES (@sid, @energy, @date)";
+                                using (var insertCommand = new SQLiteCommand(insertDataQuery, connection))
+                                {
+                                    insertCommand.Parameters.AddWithValue("@sid", sid);
+                                    insertCommand.Parameters.AddWithValue("@energy", TodayEnergy[i]);
+                                    insertCommand.Parameters.AddWithValue("@date", today);
+                                    insertCommand.ExecuteNonQuery();
+                                }
                             }
                         }
+                        
+                       
                     }
                 }
                 catch (Exception ex)
@@ -475,6 +487,9 @@ namespace GetNum
             RunThread.Abort();
             ReadThread.Abort();
             ParseThread.Abort();
+            RunThread.Join();
+            ReadThread.Join();
+            ParseThread.Join();
 
 
         }
@@ -533,14 +548,25 @@ namespace GetNum
 
             for (int i = 0; i < sims; i++)
             {
-                int energy = (int.Parse(finalArray[i, 2]) << 16) + int.Parse(finalArray[i, 1]);
-                finalArray[i, 3] = energy.ToString();
+                try
+                {
+                    int energy = (int.Parse(finalArray[i, 2]) << 16) + int.Parse(finalArray[i, 1]);
+                    finalArray[i, 3] = energy.ToString();
+                }
+                catch (ArgumentNullException) // handleing the one packet of energy lost
+                {
+                    int energy = -1;
+                    finalArray[i, 3] = energy.ToString();
+                    MessageBox.Show("salam: " + finalArray[i, 0] +" : "+ finalArray[i, 1]+" : " + finalArray[i, 2]+ " : " + finalArray[i, 3]);
+                }
+                
             }
             for (int i = 0; i < sims; i++)
             {
                 returnArray[i, 0] = finalArray[i, 0];
                 returnArray[i, 1] = finalArray[i, 3];
             }
+           
             return returnArray;
         }
         public static string[] ExtractCMTMessages(string input)
@@ -586,8 +612,6 @@ namespace GetNum
         {
 
             base.OnFormClosing(e);
-            ReadThread.Abort();
-            RunThread.Abort();
             _serialPort.Close();
             Application.Exit();
 
@@ -709,13 +733,6 @@ namespace GetNum
             _serialPort.WriteLine("AT+CSCS=\"GSM\"" + '\r');
             Thread.Sleep(400);
 
-
-
-
-
-
-            
-
             //sending batch messages
             Thread.Sleep(2000);
             ParseThread.Start();
@@ -770,7 +787,8 @@ namespace GetNum
 
             }
             RunThread.Abort();
-            
+            RunThread.Join();
+
         }
         private void RunBTN_Click(object sender, EventArgs e)
         {
@@ -785,7 +803,10 @@ namespace GetNum
             ReadThread.Abort();
             RunThread.Abort();
             ParseThread.Abort();
-           
+            ReadThread.Join();
+            RunThread.Join();
+            ParseThread.Join();
+
         }
         private void CmpBTN_Click(object sender, EventArgs e)
         {
@@ -821,6 +842,7 @@ namespace GetNum
             CompInv CompInv = new CompInv(SidList);
             CompInv.ShowDialog();
         }
+
         static Random random = new Random();
         static int GetRandomNumber(int userInput)
         {
@@ -916,14 +938,11 @@ namespace GetNum
 
             ListOfInv.EndUpdate();
         }
-
         private void ListOfInv_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             ListOfInv.ListViewItemSorter = new ListViewItemComparer(e.Column);
             ListOfInv.Sort();
         }
-
-       
         private void DeleteinvBTN_Click(object sender, EventArgs e)
         {
             if (ListOfInv.CheckedItems.Count == 0)
@@ -977,7 +996,55 @@ namespace GetNum
             }
             
         }
+        private void ClearLogBTn_Click(object sender, EventArgs e)
+        {
+            
+                if (ListOfInv.CheckedItems.Count == 0)
+                {
+                    MessageBox.Show("Please Select an inverter first...", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                DialogResult result = MessageBox.Show("Are you sure you want to delete all logs of inverter? \nPlease be careful, All data and history logs will be lost after deleting and it's not recoverable! ", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.Yes)
+                {
+                    string connectionString = "Data Source=library.db;Version=3;";
+                    using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+                    {
+                        try
+                        {
+                            connection.Open();
+                            foreach (ListViewItem selectedItem in ListOfInv.CheckedItems)
+                            {
+                                 
+                                string delQuery = "delete from DeviceTodayFeed where (SID=@SID AND date > (SELECT MIN(date) FROM devicetodayfeed));";
+                                using (SQLiteCommand delCmd = new SQLiteCommand(delQuery, connection))
+                                {
+                                    delCmd.Parameters.AddWithValue("@SID", selectedItem.Text);
+                                    delCmd.ExecuteNonQuery();
+                                }
+                                delQuery = "delete from devicefeedlog where  (SID=@SID AND date > (SELECT MIN(date) FROM devicefeedlog)) ;";
+                                using (SQLiteCommand delCmd = new SQLiteCommand(delQuery, connection))
+                                {
+                                    delCmd.Parameters.AddWithValue("@SID", selectedItem.Text);
+                                    delCmd.ExecuteNonQuery();
+                                }
+                            }
+                            InitializeListOfInverter();
+                            MessageBox.Show("Selected Inverters deleted successfully. ", "Confirmation!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Error: {ex.Message}");
+                        }
 
-        
+                    }
+                }
+                else
+                {
+                    return;
+                }
+
+            
+        }
     }
 }

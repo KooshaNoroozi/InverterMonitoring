@@ -41,6 +41,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.SearchBox = new System.Windows.Forms.TextBox();
             this.deleteinvBTN = new System.Windows.Forms.Button();
+            this.ClearLogBTn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // HomeBTN
@@ -118,7 +119,7 @@
             // 
             // CmpBTN
             // 
-            this.CmpBTN.Location = new System.Drawing.Point(1089, 429);
+            this.CmpBTN.Location = new System.Drawing.Point(974, 428);
             this.CmpBTN.Name = "CmpBTN";
             this.CmpBTN.Size = new System.Drawing.Size(114, 23);
             this.CmpBTN.TabIndex = 33;
@@ -152,19 +153,30 @@
             this.deleteinvBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.deleteinvBTN.ForeColor = System.Drawing.Color.Black;
             this.deleteinvBTN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.deleteinvBTN.Location = new System.Drawing.Point(1209, 428);
+            this.deleteinvBTN.Location = new System.Drawing.Point(1175, 428);
             this.deleteinvBTN.Name = "deleteinvBTN";
-            this.deleteinvBTN.Size = new System.Drawing.Size(54, 24);
+            this.deleteinvBTN.Size = new System.Drawing.Size(88, 24);
             this.deleteinvBTN.TabIndex = 37;
-            this.deleteinvBTN.Text = "Delete";
+            this.deleteinvBTN.Text = "Delete Inverter";
             this.deleteinvBTN.UseVisualStyleBackColor = false;
             this.deleteinvBTN.Click += new System.EventHandler(this.DeleteinvBTN_Click);
+            // 
+            // ClearLogBTn
+            // 
+            this.ClearLogBTn.Location = new System.Drawing.Point(1094, 429);
+            this.ClearLogBTn.Name = "ClearLogBTn";
+            this.ClearLogBTn.Size = new System.Drawing.Size(75, 23);
+            this.ClearLogBTn.TabIndex = 38;
+            this.ClearLogBTn.Text = "Clear Logs";
+            this.ClearLogBTn.UseVisualStyleBackColor = true;
+            this.ClearLogBTn.Click += new System.EventHandler(this.ClearLogBTn_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1273, 602);
+            this.Controls.Add(this.ClearLogBTn);
             this.Controls.Add(this.deleteinvBTN);
             this.Controls.Add(this.SearchBox);
             this.Controls.Add(this.button1);
@@ -193,8 +205,9 @@
         private System.Windows.Forms.Button CmpBTN;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox SearchBox;
-        public static System.Windows.Forms.ListView ListOfInv;
         private System.Windows.Forms.Button deleteinvBTN;
         private System.Windows.Forms.ImageList StatusIcon;
+        private System.Windows.Forms.Button ClearLogBTn;
+        public static System.Windows.Forms.ListView ListOfInv;
     }
 }
