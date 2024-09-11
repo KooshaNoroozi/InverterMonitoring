@@ -7,36 +7,154 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Collections;
+using System.Threading;
+using System.IO.Ports;
 
 namespace GetNum
 {
     public partial class SingleInverterForm : Form
     {
         int SID;
-      //  private FilterableListView ListOfAllresponse;
-      //  private TextBox FilteBox;
-        public SingleInverterForm(string data)
-        {
-            InitializeComponent();
-            InverterDashBoardOpen_DataFetch(data);
-            FirstLoadGraph();
-            SID = Int32.Parse(data);
-
-
-        }
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-        }
+        int flag=0;
+        int portflag = 0;
+        public string ChatBuffer =null;
+        private string buffer = string.Empty;
+        private Thread ReadThread;
+        public SerialPort _serialPort;
         string SerialNum = null, SimNum = null, OwnerName = null, OwnerPhone = null, Address = null;
-        
         List<string> DateOfLog = new List<string>();
         List<int> EnergyOfLog = new List<int>();
+
         int[] EnergyArray;
         string[] DateArray;
         string[] year = { "1403", "1404", "1405", "1406", "1407", "1408", "1409", "1410" };
         string[] month = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
+
+        public SingleInverterForm(string data)
+        {
+            InitializeComponent();
+            InverterDashBoardOpen_DataFetch(data);
+           
+            SID = Int32.Parse(data);
+            
+        }
+       
+        private void InitializeThread()
+        {
+            ReadThread = new Thread(ListenToComPort);
+            ReadThread.IsBackground = true;
+            ReadThread.Start();
+        }
+        private void InitializeSerialPort()
+        {
+            _serialPort = new SerialPort("COM3"); // Replace with your COM port
+            _serialPort.BaudRate = 9600;
+            _serialPort.Parity = Parity.None;
+            _serialPort.StopBits = StopBits.One;
+            _serialPort.DataBits = 8;
+            _serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
+        }
+       
+        private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string data = _serialPort.ReadExisting();
+            this.Invoke((MethodInvoker)delegate
+            {
+                // Update UI with received data
+                buffer += data;
+                LogBox.Text = buffer;
+                
+                AnswerBox.Text= string.Join(Environment.NewLine, ExtractCMTMessages(buffer));
+            });
+        }
+        private void ListenToComPort()
+        {
+            while (true)
+            {
+                _serialPort.DataReceived += SerialPort_DataReceived;
+                // Keep the thread alive
+                Thread.Sleep(200);
+            }
+        }
+        public static List<string> ExtractCMTMessages(string input)
+        {
+            List<string> messages = new List<string>();
+            string[] lines = input.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].StartsWith("+CMT:"))
+                {
+                    string message = lines[i];
+
+                    
+                    if (i + 1 < lines.Length) message = "\n" + lines[i + 1]+"\r";
+                    //if (i + 2 < lines.Length && !lines[i+2].Contains("AT") ) message += "\n" + lines[i + 2];
+                    for(int j=2; j+i< lines.Length && !lines[i + j].Contains("AT") && !lines[i + j].Contains("+CMT"); j++)
+                    {
+                         message += "\n"+ lines[i + j]+"\r";
+                    }
+
+                    messages.Add(message);
+                }
+            }
+
+            return messages;
+        }
+        public void OpeningPort()
+        {
+            if (!_serialPort.IsOpen)
+            {
+                
+                try
+                {
+                    _serialPort.Open();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+            }
+            
+        }
+        private void ReadSms()
+        {
+
+            try
+            {
+                _serialPort.WriteLine("AT+CMGD=0,4\r"); // delete pre sms
+                Thread.Sleep(400);
+
+                _serialPort.WriteLine("AT+CMGF=1\r"); // Set SMS text mode
+                Thread.Sleep(400);
+
+                _serialPort.WriteLine("AT+CPMS=\"SM\"\r"); // Select SIM storage
+                Thread.Sleep(400);
+
+                _serialPort.WriteLine("AT+CNMI=2,2,0,0,0\r");
+                Thread.Sleep(400);
+
+                // Read a specific message (example: message at index 1)
+              
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error: {ex.Message}");
+            }
+
+        }
         
+      
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            ReadThread.Abort();
+            _serialPort.Close();
+            _serialPort.Dispose();
+          
+        }
+       
         public void InverterDashBoardOpen_DataFetch(string data)
         {
             SID = Int32.Parse(data);
@@ -190,9 +308,11 @@ namespace GetNum
         private void FirstLoadGraph()
         {
             AllDataChartLoad();
-            DrawYearlyGraphs(yearpicker.Value.ToString("yyyy"));
             DrawMonthlyGraphs(MonthYearPicker.Value.ToString("yyyy-MM"));
             TotalChartLoad();
+            DrawYearlyGraphs(yearpicker.Value.ToString("yyyy"));
+
+
         }
         private void DrawYearlyGraphs(string selectedOption)
         {
@@ -262,6 +382,7 @@ namespace GetNum
             DrawYearlyGraphs(selectedOption);
                     
         }
+
         private void YearlyChartLoad(int[] oneyeararr)
         {
             
@@ -880,10 +1001,49 @@ namespace GetNum
             ListOfAllresponse.EndUpdate();
         }
 
-        private void SearchBox_TextChanged(object sender, EventArgs e)
-        {
+        
+        
 
+        private void SndMsgBtn_Click_1(object sender, EventArgs e)
+        {
+            string Question = SndBox.Text;
+            DialogResult result = MessageBox.Show($"Are you sure you want to send '{Question}' to the inverter? \nPlease be careful, The  Wrong commands can cause serious problems! ", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+            if (flag == 0)
+            {
+                _serialPort.WriteLine("AT+CMGF=1\r"); // Set SMS text mode
+                Thread.Sleep(300);
+                _serialPort.WriteLine("AT+CSCS=\"GSM\"" + '\r');
+                Thread.Sleep(300);
+                flag = 1;
+            }
+            _serialPort.WriteLine("AT+CMGS=" + "\"" + SimNum + "\"" + '\r');
+            Thread.Sleep(300);
+            _serialPort.WriteLine(Question + (char)26 + '\r');
+            Thread.Sleep(300);
+            if (AskedBox.Text.Length>0)
+            {
+                AskedBox.AppendText(Environment.NewLine);
+            }
+            AskedBox.AppendText(Question);
+            SndBox.Clear();
         }
+
+        
+
+        private void SingleInverterForm_Load(object sender, EventArgs e)
+        {
+            FirstLoadGraph();
+            InitializeSerialPort();
+            InitializeThread();
+            OpeningPort();
+            ReadSms();
+        }
+
+        
 
         private void ExportBTN_Click(object sender, EventArgs e)
         {

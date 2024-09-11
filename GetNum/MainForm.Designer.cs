@@ -76,7 +76,7 @@
             this.RunBTN.TabIndex = 30;
             this.RunBTN.Text = "Run";
             this.RunBTN.UseVisualStyleBackColor = true;
-            this.RunBTN.Click += new System.EventHandler(this.RunBTN_Click);
+            
             // 
             // RegisterBTN
             // 

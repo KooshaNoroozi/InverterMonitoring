@@ -4489,7 +4489,7 @@
             <summary>
             ExtLst updater for DataValidations
             </summary>
-            <param name="prefix"></param>
+            <param name="mainPrefix"></param>
             <returns></returns>
         </member>
         <member name="T:OfficeOpenXml.eCalculationMethod">
@@ -29031,7 +29031,7 @@
         <member name="P:OfficeOpenXml.ExcelPackageSettings.ApplyFiltersOnSave">
             <summary>
             Any auto- or table- filters created will be applied on save.
-            In the case you want to handle this manually, set this property to true.
+            In the case you want to handle this manually, set this property to false.
             </summary>
         </member>
         <member name="T:OfficeOpenXml.eOrientation">
@@ -29763,7 +29763,7 @@
             <param name="valueMethod"></param>
             <param name="value"></param>
         </member>
-        <member name="M:OfficeOpenXml.ExcelRangeBase.Set_SharedFormula(OfficeOpenXml.ExcelRangeBase,System.String,OfficeOpenXml.ExcelAddressBase,System.Boolean)">
+        <member name="M:OfficeOpenXml.ExcelRangeBase.Set_SharedFormula(OfficeOpenXml.ExcelRangeBase,System.String,OfficeOpenXml.ExcelAddressBase,System.Boolean,System.Boolean)">
             <summary>
             Handles shared formulas
             </summary>
@@ -29771,6 +29771,7 @@
             <param name="value">The  formula</param>
             <param name="address">The address of the formula</param>
             <param name="IsArray">If the forumla is an array formula.</param>
+            <param name="isDynamic">If the array formula is dynamic</param>
         </member>
         <member name="P:OfficeOpenXml.ExcelRangeBase.Style">
             <summary>
@@ -30083,11 +30084,12 @@
             Clear all cells
             </summary>
         </member>
-        <member name="M:OfficeOpenXml.ExcelRangeBase.CreateArrayFormula(System.String)">
+        <member name="M:OfficeOpenXml.ExcelRangeBase.CreateArrayFormula(System.String,System.Boolean)">
             <summary>
             Creates an array-formula.
             </summary>
             <param name="ArrayFormula">The formula</param>
+            <param name="isDynamic">If the array formula is dynamic. In most cases this is determined by the calculation when calculating the formula, so it is not be necessary to set this flag if you calculate the range. Setting this argument to true will only add the dynamic array formula cell meta data flag to the range.</param>
         </member>
         <member name="P:OfficeOpenXml.ExcelRangeBase.FormulaRange">
             <summary>
@@ -32791,6 +32793,12 @@
             The default version of themes to apply in the workbook
             </summary>
         </member>
+        <member name="P:OfficeOpenXml.ExcelWorkbook.FullPrecision">
+            <summary>
+            If false, EPPlus will round cell values to the number of decimals as displayed in the cell by using the cells number format when calculating the workbook. 
+            If true, full precision will be used on calculation.
+            </summary>
+        </member>
         <member name="M:OfficeOpenXml.ExcelWorkbook.Save">
             <summary>
             Saves the workbook and all its components to the package.
@@ -32821,6 +32829,12 @@
         <member name="P:OfficeOpenXml.ExcelWorkbook.HasLoadedPivotTables">
             <summary>
             Returns true if the workbook has pivot tables in any worksheet.
+            </summary>
+        </member>
+        <member name="P:OfficeOpenXml.ExcelWorkbook.NumberFormatToTextHandler">
+            <summary>
+            Handler for the <see cref="P:OfficeOpenXml.ExcelRangeBase.Text" /> property to override the default behaviour.
+            This can be used to handle localized number formats or formats where EPPlus differs from the spread sheet application.
             </summary>
         </member>
         <member name="T:OfficeOpenXml.ExcelWorkbookView">
@@ -33306,6 +33320,15 @@
             <param name="Column">The row number</param>
             <returns>The value</returns>
         </member>
+        <member name="M:OfficeOpenXml.ExcelWorksheet.GetValueForPivotTable(System.Int32,System.Int32)">
+            <summary>
+            Fetches the value adapted for the pivot cache. 
+            The value is converted depending on the data type. 
+            </summary>
+            <param name="Row">The row number</param>
+            <param name="Column">The row number</param>
+            <returns>The value</returns>
+        </member>
         <member name="M:OfficeOpenXml.ExcelWorksheet.GetValue``1(System.Int32,System.Int32)">
             <summary>
             Get a strongly typed cell value from the worksheet
@@ -33659,7 +33682,7 @@
             <summary>
             Validate the sheetname
             </summary>
-            <param name="Name">The Name</param>
+            <param name="Name">The name</param>
             <returns>True if valid</returns>
         </member>
         <member name="M:OfficeOpenXml.ExcelWorksheets.CreateNewWorksheet(System.Boolean)">
@@ -33713,8 +33736,8 @@
             <summary>
             Return a worksheet by its name. Can throw an exception if the worksheet does not exist.
             </summary>
-            <param name="worksheetName">Name of the reqested worksheet</param>
-            <param name="paramName">Name of the parameter</param>
+            <param name="worksheetName">name of the reqested worksheet</param>
+            <param name="paramName">name of the parameter</param>
             <param name="throwIfNull">Throws an <see cref="T:System.ArgumentNullException"></see> if the worksheet doesn't exist.</param>
             <returns></returns>
         </member>
@@ -38295,12 +38318,13 @@
             Value to represent incompatible operands
             </summary>
         </member>
-        <member name="M:OfficeOpenXml.FormulaParsing.ExcelUtilities.ValueMatcher.IsMatch(System.Object,System.Object)">
+        <member name="M:OfficeOpenXml.FormulaParsing.ExcelUtilities.ValueMatcher.IsMatch(System.Object,System.Object,System.Boolean)">
             <summary>
             Compares objects of different types using appropriate CompareTo methods
             </summary>
             <param name="searchedValue">original value</param>
             <param name="candidate">potential match</param>
+            <param name="convertNumericString">If true a numeric string will be convered to a number in the comparison. Default value is true.</param>
             <returns></returns>
         </member>
         <member name="M:OfficeOpenXml.FormulaParsing.ExcelUtilities.ValueMatcher.CompareStringToString(System.String,System.String)">
@@ -38311,12 +38335,13 @@
             <param name="candidate"></param>
             <returns></returns>
         </member>
-        <member name="M:OfficeOpenXml.FormulaParsing.ExcelUtilities.ValueMatcher.CompareStringToObject(System.String,System.Object)">
+        <member name="M:OfficeOpenXml.FormulaParsing.ExcelUtilities.ValueMatcher.CompareStringToObject(System.String,System.Object,System.Boolean)">
             <summary>
             Compares string to object candidate
             </summary>
             <param name="searchedValue"></param>
             <param name="candidate"></param>
+            <param name="convertNumericString"></param>
             <returns></returns>
         </member>
         <member name="M:OfficeOpenXml.FormulaParsing.ExcelUtilities.ValueMatcher.CompareObjectToString(System.Object,System.String)">
@@ -38611,6 +38636,21 @@
             </summary>
         </member>
         <member name="P:OfficeOpenXml.FormulaParsing.Excel.Functions.Database.Dmin.IsAllowedInCalculatedPivotTableField">
+            <summary>
+            If the function is allowed in a pivot table calculated field
+            </summary>
+        </member>
+        <member name="P:OfficeOpenXml.FormulaParsing.Excel.Functions.Database.Dproduct.IsAllowedInCalculatedPivotTableField">
+            <summary>
+            If the function is allowed in a pivot table calculated field
+            </summary>
+        </member>
+        <member name="P:OfficeOpenXml.FormulaParsing.Excel.Functions.Database.Dstdev.IsAllowedInCalculatedPivotTableField">
+            <summary>
+            If the function is allowed in a pivot table calculated field
+            </summary>
+        </member>
+        <member name="P:OfficeOpenXml.FormulaParsing.Excel.Functions.Database.DstdevP.IsAllowedInCalculatedPivotTableField">
             <summary>
             If the function is allowed in a pivot table calculated field
             </summary>
@@ -64605,7 +64645,7 @@
         </member>
         <member name="P:OfficeOpenXml.Style.ExcelNumberFormat.NumFmtID">
             <summary>
-            The numeric index fror the format
+            The numeric index for the format
             </summary>
         </member>
         <member name="P:OfficeOpenXml.Style.ExcelNumberFormat.Format">
@@ -68681,6 +68721,11 @@
             Reference to the pivot table cache definition object
             </summary>
         </member>
+        <member name="P:OfficeOpenXml.Table.PivotTable.ExcelPivotTable.IsCalculated">
+            <summary>
+            True if the pivot table has been calculated. 
+            </summary>
+        </member>
         <member name="M:OfficeOpenXml.Table.PivotTable.ExcelPivotTable.Calculate(System.Boolean)">
             <summary>
             Calculates the pivot table.
@@ -72083,6 +72128,16 @@
             <param name="returnStartPos">If the position before the start element is returned. If false the end of the end element is returned.</param>
             <param name="ix">The index position to start from</param>
             <returns>The position of the element in the input xml</returns>        
+        </member>
+        <member name="M:OfficeOpenXml.WorksheetZipStream.FindLastElementPos(System.String,System.String,System.String,System.Boolean,System.Int32)">
+            <summary>
+            Returns the position of the last instance of an element in the xml document. Either returns the position of the start element or the end element.
+            </summary>
+            <param name="xml">The xml to search</param>
+            <param name="element">The element</param>
+            <param name="returnStartPos">If the position before the start element is returned. If false the end of the end element is returned.</param>
+            <param name="ix">The index</param>
+            <returns>The position of the element in the input xml</returns>
         </member>
         <member name="M:OfficeOpenXml.WorksheetZipStream.FindLastElementPosWithoutPrefix(System.String,System.String,System.Boolean,System.Int32)">
             <summary>
