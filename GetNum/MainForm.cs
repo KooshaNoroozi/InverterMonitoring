@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
 using System.ComponentModel;
+using System.Globalization;
 
 namespace GetNum
 {
@@ -252,6 +253,16 @@ namespace GetNum
 
             return result + 5000;
         }
+        public static string ConvertGregorianToSolar(DateTime gregorianDate)
+        {
+            PersianCalendar persianCalendar = new PersianCalendar();
+            int year = persianCalendar.GetYear(gregorianDate);
+            int month = persianCalendar.GetMonth(gregorianDate);
+            int day = persianCalendar.GetDayOfMonth(gregorianDate);
+
+            return $"{year}-{month:D2}-{day:D2}";
+        }
+
         private void Button1_Click(object sender, EventArgs e)
         {
             string connectionString = "Data Source=library.db;Version=3;";
@@ -280,8 +291,9 @@ namespace GetNum
                                 rndenergy = GetRandomNumber(i);
                                 numdate = i;
                                 thatdate = currentDate.AddDays(numdate);
-                                spcdate = thatdate.ToString("yyyy-MM-dd");
-
+                                spcdate = ConvertGregorianToSolar(thatdate);
+                               
+                               
                                 if (spcdate.Substring(5, 2) == "03" || spcdate.Substring(5, 2) == "06") { rndenergy = (int)Math.Round(rndenergy * 0.9); }
                                 if (spcdate.Substring(5, 2) == "02" || spcdate.Substring(5, 2) == "07") { rndenergy = (int)Math.Round(rndenergy * 0.8); }
                                 if (spcdate.Substring(5, 2) == "01" || spcdate.Substring(5, 2) == "08") { rndenergy = (int)Math.Round(rndenergy * 0.7); }

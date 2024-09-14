@@ -9,6 +9,8 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Collections;
 using System.Threading;
 using System.IO.Ports;
+using System.Drawing;
+using System.Globalization;
 
 namespace GetNum
 {
@@ -17,7 +19,8 @@ namespace GetNum
         int SID;
         int flag=0;
         int portflag = 0;
-        public string ChatBuffer =null;
+        public string Question = null;
+        public string ChatBuffer = null;
         private string buffer = string.Empty;
         private Thread ReadThread;
         public SerialPort _serialPort;
@@ -34,7 +37,6 @@ namespace GetNum
         {
             InitializeComponent();
             InverterDashBoardOpen_DataFetch(data);
-           
             SID = Int32.Parse(data);
             
         }
@@ -88,11 +90,11 @@ namespace GetNum
                     string message = lines[i];
 
                     
-                    if (i + 1 < lines.Length) message = "\n" + lines[i + 1]+"\r";
+                    if (i + 1 < lines.Length) message = lines[i + 1]+"\r\n";
                     //if (i + 2 < lines.Length && !lines[i+2].Contains("AT") ) message += "\n" + lines[i + 2];
                     for(int j=2; j+i< lines.Length && !lines[i + j].Contains("AT") && !lines[i + j].Contains("+CMT"); j++)
                     {
-                         message += "\n"+ lines[i + j]+"\r";
+                         message += lines[i + j]+"\r\n";
                     }
 
                     messages.Add(message);
@@ -144,8 +146,16 @@ namespace GetNum
             }
 
         }
-        
-      
+        public static string ConvertGregorianToSolar(DateTime gregorianDate)
+        {
+            PersianCalendar persianCalendar = new PersianCalendar();
+            int year = persianCalendar.GetYear(gregorianDate);
+            int month = persianCalendar.GetMonth(gregorianDate);
+            int day = persianCalendar.GetDayOfMonth(gregorianDate);
+
+            return $"{year}-{month:D2}-{day:D2}";
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
@@ -213,8 +223,8 @@ namespace GetNum
         private void ListOfAllData_Load()
         {
             InitializeListOfAllResponses();
-            
-            
+            InitializeListOfChat();
+
         }
         private class ListViewItemComparer : IComparer
         {
@@ -230,6 +240,25 @@ namespace GetNum
                 return string.Compare(((ListViewItem)x).SubItems[columnIndex].Text,
                     ((ListViewItem)y).SubItems[columnIndex].Text);
             }
+        }
+        private void InitializeListOfChat()
+        {
+
+            ListOfChat.Columns.Clear();
+            ListOfChat.View = View.Details;
+            ListOfChat.FullRowSelect = true;
+            ListOfChat.GridLines = true;
+
+            // Add columns to ListView
+            ListOfChat.Columns.Add("Date", 100, HorizontalAlignment.Center);
+
+            ListOfChat.Columns.Add("Questions", 150, HorizontalAlignment.Center);
+
+            ListOfChat.Columns.Add("Answers", 300, HorizontalAlignment.Center);
+
+            ListOfChat.ListViewItemSorter = new ListViewItemComparer(0);
+
+            LoadChatData();
         }
         private void InitializeListOfAllResponses()
         {
@@ -249,6 +278,36 @@ namespace GetNum
             ListOfAllresponse.ListViewItemSorter = new ListViewItemComparer(0);
 
             LoadListData();
+        }
+        private void LoadChatData()
+        {
+            ListOfChat.Items.Clear();
+            string connectionString = "Data Source=library.db;Version=3;";
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+
+                string query1 = @"SELECT * FROM DeviceChatTable WHERE SID = @SID";
+
+                using (SQLiteCommand command1 = new SQLiteCommand(query1, connection))
+                {
+                    command1.Parameters.AddWithValue("@SID", SID);
+                    using (SQLiteDataReader reader1 = command1.ExecuteReader())
+                    {
+                        while (reader1.Read())
+                        {
+                            ListViewItem item = new ListViewItem(reader1["Date"].ToString());
+                            item.SubItems.Add(reader1["Questions"].ToString().Replace("\n"  , "  "));
+                            item.SubItems.Add(reader1["Answers"].ToString().Replace("\n"  , "  "));
+                            ListOfChat.Items.Add(item);
+                        }
+                    }
+                }
+
+
+            }
+
+
         }
         private void LoadListData()
         {
@@ -1006,7 +1065,7 @@ namespace GetNum
 
         private void SndMsgBtn_Click_1(object sender, EventArgs e)
         {
-            string Question = SndBox.Text;
+            Question = SndBox.Text;
             DialogResult result = MessageBox.Show($"Are you sure you want to send '{Question}' to the inverter? \nPlease be careful, The  Wrong commands can cause serious problems! ", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Cancel)
             {
@@ -1036,11 +1095,109 @@ namespace GetNum
 
         private void SingleInverterForm_Load(object sender, EventArgs e)
         {
+            
             FirstLoadGraph();
             InitializeSerialPort();
             InitializeThread();
             OpeningPort();
             ReadSms();
+            InitializeComboBox();
+        }
+        private void InitializeComboBox()
+        {
+            DefaultQuestionCombo.Items.Add("سایر");
+            DefaultQuestionCombo.Items.Add("مقدار توان");
+            DefaultQuestionCombo.Items.Add("زمان اینورتر");
+            DefaultQuestionCombo.Items.Add("تعیین ساعت اینورتر");
+            DefaultQuestionCombo.Items.Add("کیفیت سینگال آنتن دهی");
+            DefaultQuestionCombo.Items.Add("آخرین اتفاق رخ داده");
+            DefaultQuestionCombo.Items.Add("گزارش اتفاق با شماره معلوم");
+            DefaultQuestionCombo.Items.Add("سوال از مقدار رجیستر های داخلی ");
+            DefaultQuestionCombo.Items.Add("تعیین رجیستر های داخلی");
+
+            
+            DefaultQuestionCombo.SelectedIndex = 0;
+        }
+        
+
+        private void DefaultQuestionCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (DefaultQuestionCombo.SelectedIndex == 0)
+            {
+                SndBox.Clear();
+            }
+            if (DefaultQuestionCombo.SelectedIndex == 1)
+            {
+                SndBox.Text = "P?";
+            }
+            if (DefaultQuestionCombo.SelectedIndex == 2)
+            {
+                SndBox.Text = "T?";
+            }
+            if (DefaultQuestionCombo.SelectedIndex == 3)
+            {
+                SndBox.Text = "T=.";
+            }
+            if (DefaultQuestionCombo.SelectedIndex == 4)
+            {
+                SndBox.Text = "Q?";
+            }
+            if (DefaultQuestionCombo.SelectedIndex == 5)
+            {
+                SndBox.Text = "EVT?";
+            }
+            if (DefaultQuestionCombo.SelectedIndex == 6)
+            {
+                SndBox.Text = "EVT__?";
+            }
+            if (DefaultQuestionCombo.SelectedIndex == 7)
+            {
+                SndBox.Text = "MB__?";
+            }
+            if (DefaultQuestionCombo.SelectedIndex == 8)
+            {
+                SndBox.Text = "MB__=__";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            DateTime currentDate = DateTime.Today;
+            string today = ConvertGregorianToSolar(currentDate);
+            string connectionString = "Data Source=library.db;Version=3;";
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+
+                    // Create a table if it doesn't exist
+                    string createTableQuery = "CREATE TABLE IF NOT EXISTS DeviceChatTable (SID INTEGER ,Date TEXT , Questions TEXT,Answers TEXT)";
+                    using (SQLiteCommand createTableCmd = new SQLiteCommand(createTableQuery, connection))
+                    {
+                        createTableCmd.ExecuteNonQuery();
+                    }
+                    
+                    // Insert data from TextBox
+                    string insertDataQuery = "INSERT INTO DeviceChatTable (SID, Date, Questions, Answers) VALUES (@SID, @Date, @Questions, @Answers)";
+                    using (SQLiteCommand insertDataCmd = new SQLiteCommand(insertDataQuery, connection))
+                    {
+                        insertDataCmd.Parameters.AddWithValue("@SID", SID);
+                        insertDataCmd.Parameters.AddWithValue("@Date", today);
+                        insertDataCmd.Parameters.AddWithValue("@Questions",AskedBox.Text);
+                        insertDataCmd.Parameters.AddWithValue("@Answers", AnswerBox.Text);
+                        insertDataCmd.ExecuteNonQuery();
+                    }
+
+                    
+                    MessageBox.Show("Data inserted successfully!", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
+            }
         }
 
         
