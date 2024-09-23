@@ -59,7 +59,7 @@ namespace GetNum
                 SingleInverterForm.ShowDialog();
             }
         }
-        public static void LoadData()
+        public void LoadData()
         {
             ListOfInv.Items.Clear();//clearing previous list to creating new one
             string connectionString = "Data Source=library.db;Version=3;";
@@ -127,7 +127,7 @@ namespace GetNum
 
             }
         }
-        public static void InitializeListOfInverter()
+        public  void InitializeListOfInverter()
         {
             
             ListOfInv.Columns.Clear();
@@ -136,12 +136,12 @@ namespace GetNum
             ListOfInv.GridLines = true;
 
             // Add columns to ListView
-            ListOfInv.Columns.Add("SID", 50, HorizontalAlignment.Center);
+            ListOfInv.Columns.Add("SID", 70, HorizontalAlignment.Center);
             ListOfInv.Columns.Add("Serial Number", 90, HorizontalAlignment.Center);
-            ListOfInv.Columns.Add("Name", 150, HorizontalAlignment.Center);
+            ListOfInv.Columns.Add("Name", 200, HorizontalAlignment.Center);
             ListOfInv.Columns.Add("Status", 90, HorizontalAlignment.Center);
-            ListOfInv.Columns.Add("Avrage Energy", 90 , HorizontalAlignment.Center);
-            ListOfInv.Columns.Add("Total Energy", 90, HorizontalAlignment.Center);
+            ListOfInv.Columns.Add("Avrage Energy", 100 , HorizontalAlignment.Center);
+            ListOfInv.Columns.Add("Total Energy", 100, HorizontalAlignment.Center);
             ListOfInv.Columns.Add("Address", 250, HorizontalAlignment.Right);
 
             ListOfInv.ListViewItemSorter = new ListViewItemComparer(0);
@@ -381,6 +381,12 @@ namespace GetNum
                                 delCmd.ExecuteNonQuery();
                             }
                             delQuery = "delete from devicefeedlog where SID=@SID ;";
+                            using (SQLiteCommand delCmd = new SQLiteCommand(delQuery, connection))
+                            {
+                                delCmd.Parameters.AddWithValue("@SID", selectedItem.Text);
+                                delCmd.ExecuteNonQuery();
+                            }
+                            delQuery = "delete from deviceChatTable where SID=@SID ;";
                             using (SQLiteCommand delCmd = new SQLiteCommand(delQuery, connection))
                             {
                                 delCmd.Parameters.AddWithValue("@SID", selectedItem.Text);

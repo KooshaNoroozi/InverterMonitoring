@@ -32,13 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.HomeBTN = new System.Windows.Forms.Button();
             this.COM3 = new System.IO.Ports.SerialPort(this.components);
-            this.RecieveTextBox = new System.Windows.Forms.TextBox();
-            this.RunBTN = new System.Windows.Forms.Button();
             this.RegisterBTN = new System.Windows.Forms.Button();
-            ListOfInv = new System.Windows.Forms.ListView();
+            this.ListOfInv = new System.Windows.Forms.ListView();
             this.StatusIcon = new System.Windows.Forms.ImageList(this.components);
             this.CmpBTN = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.SearchBox = new System.Windows.Forms.TextBox();
             this.deleteinvBTN = new System.Windows.Forms.Button();
             this.ClearLogBTn = new System.Windows.Forms.Button();
@@ -46,7 +43,7 @@
             // 
             // HomeBTN
             // 
-            this.HomeBTN.Location = new System.Drawing.Point(99, 378);
+            this.HomeBTN.Location = new System.Drawing.Point(398, 22);
             this.HomeBTN.Name = "HomeBTN";
             this.HomeBTN.Size = new System.Drawing.Size(75, 23);
             this.HomeBTN.TabIndex = 27;
@@ -58,29 +55,9 @@
             // 
             this.COM3.PortName = "COM3";
             // 
-            // RecieveTextBox
-            // 
-            this.RecieveTextBox.Location = new System.Drawing.Point(49, 105);
-            this.RecieveTextBox.Multiline = true;
-            this.RecieveTextBox.Name = "RecieveTextBox";
-            this.RecieveTextBox.ReadOnly = true;
-            this.RecieveTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.RecieveTextBox.Size = new System.Drawing.Size(206, 201);
-            this.RecieveTextBox.TabIndex = 29;
-            // 
-            // RunBTN
-            // 
-            this.RunBTN.Location = new System.Drawing.Point(111, 34);
-            this.RunBTN.Name = "RunBTN";
-            this.RunBTN.Size = new System.Drawing.Size(75, 23);
-            this.RunBTN.TabIndex = 30;
-            this.RunBTN.Text = "Run";
-            this.RunBTN.UseVisualStyleBackColor = true;
-            
-            // 
             // RegisterBTN
             // 
-            this.RegisterBTN.Location = new System.Drawing.Point(73, 323);
+            this.RegisterBTN.Location = new System.Drawing.Point(212, 22);
             this.RegisterBTN.Name = "RegisterBTN";
             this.RegisterBTN.Size = new System.Drawing.Size(137, 23);
             this.RegisterBTN.TabIndex = 31;
@@ -90,23 +67,23 @@
             // 
             // ListOfInv
             // 
-            ListOfInv.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            ListOfInv.AllowColumnReorder = true;
-            ListOfInv.CheckBoxes = true;
-            ListOfInv.FullRowSelect = true;
-            ListOfInv.HideSelection = false;
-            ListOfInv.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            ListOfInv.Location = new System.Drawing.Point(338, 105);
-            ListOfInv.Margin = new System.Windows.Forms.Padding(4);
-            ListOfInv.MultiSelect = false;
-            ListOfInv.Name = "ListOfInv";
-            ListOfInv.Size = new System.Drawing.Size(922, 316);
-            ListOfInv.SmallImageList = this.StatusIcon;
-            ListOfInv.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            ListOfInv.TabIndex = 32;
-            ListOfInv.UseCompatibleStateImageBehavior = false;
-            ListOfInv.View = System.Windows.Forms.View.Details;
-            ListOfInv.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ListOfInv_ColumnClick);
+            this.ListOfInv.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.ListOfInv.AllowColumnReorder = true;
+            this.ListOfInv.CheckBoxes = true;
+            this.ListOfInv.FullRowSelect = true;
+            this.ListOfInv.HideSelection = false;
+            this.ListOfInv.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.ListOfInv.Location = new System.Drawing.Point(13, 88);
+            this.ListOfInv.Margin = new System.Windows.Forms.Padding(4);
+            this.ListOfInv.MultiSelect = false;
+            this.ListOfInv.Name = "ListOfInv";
+            this.ListOfInv.Size = new System.Drawing.Size(961, 614);
+            this.ListOfInv.SmallImageList = this.StatusIcon;
+            this.ListOfInv.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.ListOfInv.TabIndex = 32;
+            this.ListOfInv.UseCompatibleStateImageBehavior = false;
+            this.ListOfInv.View = System.Windows.Forms.View.Details;
+            this.ListOfInv.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.ListOfInv_ColumnClick);
             // 
             // StatusIcon
             // 
@@ -119,7 +96,7 @@
             // 
             // CmpBTN
             // 
-            this.CmpBTN.Location = new System.Drawing.Point(974, 428);
+            this.CmpBTN.Location = new System.Drawing.Point(503, 22);
             this.CmpBTN.Name = "CmpBTN";
             this.CmpBTN.Size = new System.Drawing.Size(114, 23);
             this.CmpBTN.TabIndex = 33;
@@ -127,20 +104,9 @@
             this.CmpBTN.UseVisualStyleBackColor = true;
             this.CmpBTN.Click += new System.EventHandler(this.CmpBTN_Click);
             // 
-            // button1
-            // 
-            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(366, 536);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
             // SearchBox
             // 
-            this.SearchBox.Location = new System.Drawing.Point(348, 61);
+            this.SearchBox.Location = new System.Drawing.Point(13, 22);
             this.SearchBox.Name = "SearchBox";
             this.SearchBox.Size = new System.Drawing.Size(156, 20);
             this.SearchBox.TabIndex = 35;
@@ -153,7 +119,7 @@
             this.deleteinvBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.deleteinvBTN.ForeColor = System.Drawing.Color.Black;
             this.deleteinvBTN.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.deleteinvBTN.Location = new System.Drawing.Point(1175, 428);
+            this.deleteinvBTN.Location = new System.Drawing.Point(886, 21);
             this.deleteinvBTN.Name = "deleteinvBTN";
             this.deleteinvBTN.Size = new System.Drawing.Size(88, 24);
             this.deleteinvBTN.TabIndex = 37;
@@ -163,7 +129,7 @@
             // 
             // ClearLogBTn
             // 
-            this.ClearLogBTn.Location = new System.Drawing.Point(1094, 429);
+            this.ClearLogBTn.Location = new System.Drawing.Point(682, 22);
             this.ClearLogBTn.Name = "ClearLogBTn";
             this.ClearLogBTn.Size = new System.Drawing.Size(75, 23);
             this.ClearLogBTn.TabIndex = 38;
@@ -175,16 +141,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1273, 602);
+            this.ClientSize = new System.Drawing.Size(986, 732);
             this.Controls.Add(this.ClearLogBTn);
             this.Controls.Add(this.deleteinvBTN);
             this.Controls.Add(this.SearchBox);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.CmpBTN);
-            this.Controls.Add(ListOfInv);
+            this.Controls.Add(this.ListOfInv);
             this.Controls.Add(this.RegisterBTN);
-            this.Controls.Add(this.RunBTN);
-            this.Controls.Add(this.RecieveTextBox);
             this.Controls.Add(this.HomeBTN);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -199,15 +162,12 @@
 
         private System.Windows.Forms.Button HomeBTN;
         private System.IO.Ports.SerialPort COM3;
-        private System.Windows.Forms.TextBox RecieveTextBox;
-        private System.Windows.Forms.Button RunBTN;
         private System.Windows.Forms.Button RegisterBTN;
         private System.Windows.Forms.Button CmpBTN;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox SearchBox;
         private System.Windows.Forms.Button deleteinvBTN;
         private System.Windows.Forms.ImageList StatusIcon;
         private System.Windows.Forms.Button ClearLogBTn;
-        public static System.Windows.Forms.ListView ListOfInv;
+        public System.Windows.Forms.ListView ListOfInv;
     }
 }

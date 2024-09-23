@@ -1200,7 +1200,11 @@ namespace GetNum
             }
         }
 
-        
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            _serialPort.WriteLine(ATtxt.Text);
+            ATtxt.Clear();
+        }
 
         private void ExportBTN_Click(object sender, EventArgs e)
         {

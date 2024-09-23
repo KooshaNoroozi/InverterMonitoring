@@ -41,3 +41,7 @@ C:\Users\Koosha\source\repos\GetNum\GetNum\bin\Debug\EPPlus.xml
 C:\Users\Koosha\source\repos\GetNum\GetNum\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
 C:\Users\Koosha\source\repos\GetNum\GetNum\obj\Debug\GetNum.CompInv.resources
 C:\Users\Koosha\source\repos\GetNum\GetNum\obj\Debug\GetNum.csproj.AssemblyReference.cache
+C:\Users\Koosha\source\repos\GetNum\GetNum\bin\Debug\GetNum.exe.manifest
+C:\Users\Koosha\source\repos\GetNum\GetNum\bin\Debug\GetNum.application
+C:\Users\Koosha\source\repos\GetNum\GetNum\obj\Debug\GetNum.exe.manifest
+C:\Users\Koosha\source\repos\GetNum\GetNum\obj\Debug\GetNum.application

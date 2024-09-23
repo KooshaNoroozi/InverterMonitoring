@@ -125,7 +125,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAADE
-        CAAAAk1TRnQBSQFMAgEBBAEAAbABAAGwAQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CAAAAk1TRnQBSQFMAgEBBAEAAbgBAAG4AQABEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAASADAAEBAQABCAYAAQgYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -666,116 +666,50 @@
   <data name="&gt;&gt;CancelBTN.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;SaveChat.Name" xml:space="preserve">
-    <value>SaveChat</value>
+  <data name="ATtxt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>535, 23</value>
   </data>
-  <data name="&gt;&gt;SaveChat.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="ATtxt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 20</value>
   </data>
-  <data name="&gt;&gt;SaveChat.Parent" xml:space="preserve">
+  <data name="ATtxt.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;ATtxt.Name" xml:space="preserve">
+    <value>ATtxt</value>
+  </data>
+  <data name="&gt;&gt;ATtxt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ATtxt.Parent" xml:space="preserve">
     <value>tabPage7</value>
   </data>
-  <data name="&gt;&gt;SaveChat.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ATtxt.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;LogBox.Name" xml:space="preserve">
-    <value>LogBox</value>
+  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>336, 23</value>
   </data>
-  <data name="&gt;&gt;LogBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 28</value>
   </data>
-  <data name="&gt;&gt;LogBox.Parent" xml:space="preserve">
-    <value>tabPage7</value>
+  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
   </data>
-  <data name="&gt;&gt;LogBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="button1.Text" xml:space="preserve">
+    <value>button1</value>
   </data>
-  <data name="&gt;&gt;AskedBox.Name" xml:space="preserve">
-    <value>AskedBox</value>
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+    <value>button1</value>
   </data>
-  <data name="&gt;&gt;AskedBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AskedBox.Parent" xml:space="preserve">
-    <value>tabPage7</value>
-  </data>
-  <data name="&gt;&gt;AskedBox.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;AnswerBox.Name" xml:space="preserve">
-    <value>AnswerBox</value>
-  </data>
-  <data name="&gt;&gt;AnswerBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;AnswerBox.Parent" xml:space="preserve">
-    <value>tabPage7</value>
-  </data>
-  <data name="&gt;&gt;AnswerBox.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;SndBox.Name" xml:space="preserve">
-    <value>SndBox</value>
-  </data>
-  <data name="&gt;&gt;SndBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;SndBox.Parent" xml:space="preserve">
-    <value>tabPage7</value>
-  </data>
-  <data name="&gt;&gt;SndBox.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;SndMsgBtn.Name" xml:space="preserve">
-    <value>SndMsgBtn</value>
-  </data>
-  <data name="&gt;&gt;SndMsgBtn.Type" xml:space="preserve">
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;SndMsgBtn.Parent" xml:space="preserve">
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
     <value>tabPage7</value>
   </data>
-  <data name="&gt;&gt;SndMsgBtn.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;DefaultQuestionCombo.Name" xml:space="preserve">
-    <value>DefaultQuestionCombo</value>
-  </data>
-  <data name="&gt;&gt;DefaultQuestionCombo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;DefaultQuestionCombo.Parent" xml:space="preserve">
-    <value>tabPage7</value>
-  </data>
-  <data name="&gt;&gt;DefaultQuestionCombo.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="tabPage7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage7.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 504</value>
-  </data>
-  <data name="tabPage7.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="tabPage7.Text" xml:space="preserve">
-    <value>Talking With Inverter</value>
-  </data>
-  <data name="&gt;&gt;tabPage7.Name" xml:space="preserve">
-    <value>tabPage7</value>
-  </data>
-  <data name="&gt;&gt;tabPage7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage7.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;tabPage7.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="SaveChat.Location" type="System.Drawing.Point, System.Drawing">
     <value>914, 457</value>
@@ -799,7 +733,7 @@
     <value>tabPage7</value>
   </data>
   <data name="&gt;&gt;SaveChat.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="LogBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>321, 99</value>
@@ -826,7 +760,7 @@
     <value>tabPage7</value>
   </data>
   <data name="&gt;&gt;LogBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="AskedBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
@@ -856,7 +790,7 @@
     <value>tabPage7</value>
   </data>
   <data name="&gt;&gt;AskedBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="AnswerBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
@@ -886,7 +820,7 @@
     <value>tabPage7</value>
   </data>
   <data name="&gt;&gt;AnswerBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="SndBox.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -910,7 +844,7 @@
     <value>tabPage7</value>
   </data>
   <data name="&gt;&gt;SndBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="SndMsgBtn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -937,7 +871,7 @@
     <value>tabPage7</value>
   </data>
   <data name="&gt;&gt;SndMsgBtn.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="DefaultQuestionCombo.Location" type="System.Drawing.Point, System.Drawing">
     <value>32, 135</value>
@@ -961,6 +895,33 @@
     <value>tabPage7</value>
   </data>
   <data name="&gt;&gt;DefaultQuestionCombo.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="tabPage7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage7.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1052, 504</value>
+  </data>
+  <data name="tabPage7.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="tabPage7.Text" xml:space="preserve">
+    <value>Talking With Inverter</value>
+  </data>
+  <data name="&gt;&gt;tabPage7.Name" xml:space="preserve">
+    <value>tabPage7</value>
+  </data>
+  <data name="&gt;&gt;tabPage7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage7.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabPage7.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="tabPage5.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -2376,249 +2337,6 @@
   <data name="tabPage5.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
-  <data name="&gt;&gt;button2.Name" xml:space="preserve">
-    <value>button2</value>
-  </data>
-  <data name="&gt;&gt;button2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ToYearPicker.Name" xml:space="preserve">
-    <value>ToYearPicker</value>
-  </data>
-  <data name="&gt;&gt;ToYearPicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToYearPicker.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;ToYearPicker.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;FromYearPicker.Name" xml:space="preserve">
-    <value>FromYearPicker</value>
-  </data>
-  <data name="&gt;&gt;FromYearPicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FromYearPicker.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;FromYearPicker.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ToMonthPicker.Name" xml:space="preserve">
-    <value>ToMonthPicker</value>
-  </data>
-  <data name="&gt;&gt;ToMonthPicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToMonthPicker.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;ToMonthPicker.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;label11.Name" xml:space="preserve">
-    <value>label11</value>
-  </data>
-  <data name="&gt;&gt;label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label11.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;label11.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;label10.Name" xml:space="preserve">
-    <value>label10</value>
-  </data>
-  <data name="&gt;&gt;label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label10.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
-    <value>label9</value>
-  </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label8.Name" xml:space="preserve">
-    <value>label8</value>
-  </data>
-  <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label8.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;label8.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;FromMonthPicker.Name" xml:space="preserve">
-    <value>FromMonthPicker</value>
-  </data>
-  <data name="&gt;&gt;FromMonthPicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FromMonthPicker.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;FromMonthPicker.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ExportList.Name" xml:space="preserve">
-    <value>ExportList</value>
-  </data>
-  <data name="&gt;&gt;ExportList.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ExportList.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;ExportList.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;MakeListBTN.Name" xml:space="preserve">
-    <value>MakeListBTN</value>
-  </data>
-  <data name="&gt;&gt;MakeListBTN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MakeListBTN.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;MakeListBTN.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;radioyear.Name" xml:space="preserve">
-    <value>radioyear</value>
-  </data>
-  <data name="&gt;&gt;radioyear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioyear.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;radioyear.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;radiomonth.Name" xml:space="preserve">
-    <value>radiomonth</value>
-  </data>
-  <data name="&gt;&gt;radiomonth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radiomonth.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;radiomonth.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;radioday.Name" xml:space="preserve">
-    <value>radioday</value>
-  </data>
-  <data name="&gt;&gt;radioday.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;radioday.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;radioday.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;label7.Name" xml:space="preserve">
-    <value>label7</value>
-  </data>
-  <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label7.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;label6.Name" xml:space="preserve">
-    <value>label6</value>
-  </data>
-  <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ToDatePicker.Name" xml:space="preserve">
-    <value>ToDatePicker</value>
-  </data>
-  <data name="&gt;&gt;ToDatePicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToDatePicker.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;ToDatePicker.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;FromDatePicker.Name" xml:space="preserve">
-    <value>FromDatePicker</value>
-  </data>
-  <data name="&gt;&gt;FromDatePicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FromDatePicker.Parent" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;FromDatePicker.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 504</value>
-  </data>
-  <data name="tabPage5.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="tabPage5.Text" xml:space="preserve">
-    <value>Table Of Data</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.Name" xml:space="preserve">
-    <value>tabPage5</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;tabPage5.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -3147,6 +2865,45 @@
   <data name="&gt;&gt;FromDatePicker.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="tabPage5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage5.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1052, 504</value>
+  </data>
+  <data name="tabPage5.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tabPage5.Text" xml:space="preserve">
+    <value>Table Of Data</value>
+  </data>
+  <data name="&gt;&gt;tabPage5.Name" xml:space="preserve">
+    <value>tabPage5</value>
+  </data>
+  <data name="&gt;&gt;tabPage5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage5.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabPage5.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="TotalChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 43</value>
+  </data>
+  <data name="TotalChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>991, 418</value>
+  </data>
+  <data name="TotalChart.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TotalChart.Text" xml:space="preserve">
+    <value>chart1</value>
+  </data>
   <data name="&gt;&gt;TotalChart.Name" xml:space="preserve">
     <value>TotalChart</value>
   </data>
@@ -3185,81 +2942,6 @@
   </data>
   <data name="&gt;&gt;tabPage4.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="TotalChart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 43</value>
-  </data>
-  <data name="TotalChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>991, 418</value>
-  </data>
-  <data name="TotalChart.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="TotalChart.Text" xml:space="preserve">
-    <value>chart1</value>
-  </data>
-  <data name="&gt;&gt;TotalChart.Name" xml:space="preserve">
-    <value>TotalChart</value>
-  </data>
-  <data name="&gt;&gt;TotalChart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
-  </data>
-  <data name="&gt;&gt;TotalChart.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;TotalChart.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;MonthYearPicker.Name" xml:space="preserve">
-    <value>MonthYearPicker</value>
-  </data>
-  <data name="&gt;&gt;MonthYearPicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MonthYearPicker.Parent" xml:space="preserve">
-    <value>tabPage3</value>
-  </data>
-  <data name="&gt;&gt;MonthYearPicker.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;monthlyChart.Name" xml:space="preserve">
-    <value>monthlyChart</value>
-  </data>
-  <data name="&gt;&gt;monthlyChart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
-  </data>
-  <data name="&gt;&gt;monthlyChart.Parent" xml:space="preserve">
-    <value>tabPage3</value>
-  </data>
-  <data name="&gt;&gt;monthlyChart.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1052, 504</value>
-  </data>
-  <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tabPage3.Text" xml:space="preserve">
-    <value>Monthly</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Name" xml:space="preserve">
-    <value>tabPage3</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.Parent" xml:space="preserve">
-    <value>tabControl</value>
-  </data>
-  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="MonthYearPicker.CalendarFont" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt, style=Bold</value>
@@ -3318,56 +3000,32 @@
   <data name="&gt;&gt;monthlyChart.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;yearpicker.Name" xml:space="preserve">
-    <value>yearpicker</value>
-  </data>
-  <data name="&gt;&gt;yearpicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;yearpicker.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;yearpicker.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;YearlyChart.Name" xml:space="preserve">
-    <value>YearlyChart</value>
-  </data>
-  <data name="&gt;&gt;YearlyChart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
-  </data>
-  <data name="&gt;&gt;YearlyChart.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;YearlyChart.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabPage3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPage3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
     <value>1052, 504</value>
   </data>
-  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Yearly</value>
+  <data name="tabPage3.Text" xml:space="preserve">
+    <value>Monthly</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
-    <value>tabPage2</value>
+  <data name="&gt;&gt;tabPage3.Name" xml:space="preserve">
+    <value>tabPage3</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPage3.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPage3.Parent" xml:space="preserve">
     <value>tabControl</value>
   </data>
-  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="yearpicker.CustomFormat" xml:space="preserve">
     <value>yyyy</value>
@@ -3420,92 +3078,32 @@
   <data name="&gt;&gt;YearlyChart.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;label12.Name" xml:space="preserve">
-    <value>label12</value>
-  </data>
-  <data name="&gt;&gt;label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;label13.Name" xml:space="preserve">
-    <value>label13</value>
-  </data>
-  <data name="&gt;&gt;label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label13.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;label13.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ToPicker.Name" xml:space="preserve">
-    <value>ToPicker</value>
-  </data>
-  <data name="&gt;&gt;ToPicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToPicker.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;ToPicker.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;FromPicker.Name" xml:space="preserve">
-    <value>FromPicker</value>
-  </data>
-  <data name="&gt;&gt;FromPicker.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DateTimePicker, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;FromPicker.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;FromPicker.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;AllDataChart.Name" xml:space="preserve">
-    <value>AllDataChart</value>
-  </data>
-  <data name="&gt;&gt;AllDataChart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataVisualization.Charting.Chart, System.Windows.Forms.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35</value>
-  </data>
-  <data name="&gt;&gt;AllDataChart.Parent" xml:space="preserve">
-    <value>tabPage1</value>
-  </data>
-  <data name="&gt;&gt;AllDataChart.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>1052, 504</value>
   </data>
-  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>All Data</value>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Yearly</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
-    <value>tabPage1</value>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
     <value>tabControl</value>
   </data>
-  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="label12.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3647,6 +3245,33 @@
   </data>
   <data name="&gt;&gt;AllDataChart.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1052, 504</value>
+  </data>
+  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>All Data</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+    <value>tabControl</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="tabPage6.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>

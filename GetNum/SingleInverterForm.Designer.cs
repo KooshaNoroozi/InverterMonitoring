@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SingleInverterForm));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.StatusIcon = new System.Windows.Forms.ImageList(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -108,6 +108,8 @@
             this.SearchBTN = new System.Windows.Forms.Button();
             this.ListOfAllresponse = new System.Windows.Forms.ListView();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ATtxt = new System.Windows.Forms.TextBox();
             this.tabPage7.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -230,6 +232,8 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.Gray;
+            this.tabPage7.Controls.Add(this.ATtxt);
+            this.tabPage7.Controls.Add(this.button1);
             this.tabPage7.Controls.Add(this.SaveChat);
             this.tabPage7.Controls.Add(this.LogBox);
             this.tabPage7.Controls.Add(this.AskedBox);
@@ -436,17 +440,17 @@
             // TotalChart
             // 
             this.TotalChart.BackColor = System.Drawing.Color.Transparent;
-            chartArea5.Name = "ChartArea1";
-            this.TotalChart.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.TotalChart.Legends.Add(legend5);
+            chartArea1.Name = "ChartArea1";
+            this.TotalChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.TotalChart.Legends.Add(legend1);
             resources.ApplyResources(this.TotalChart, "TotalChart");
             this.TotalChart.Name = "TotalChart";
             this.TotalChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.TotalChart.Series.Add(series5);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.TotalChart.Series.Add(series1);
             // 
             // tabPage3
             // 
@@ -467,17 +471,17 @@
             // monthlyChart
             // 
             this.monthlyChart.BackColor = System.Drawing.Color.Transparent;
-            chartArea6.Name = "ChartArea1";
-            this.monthlyChart.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.monthlyChart.Legends.Add(legend6);
+            chartArea2.Name = "ChartArea1";
+            this.monthlyChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.monthlyChart.Legends.Add(legend2);
             resources.ApplyResources(this.monthlyChart, "monthlyChart");
             this.monthlyChart.Name = "monthlyChart";
             this.monthlyChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.monthlyChart.Series.Add(series6);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.monthlyChart.Series.Add(series2);
             // 
             // tabPage2
             // 
@@ -500,17 +504,17 @@
             // YearlyChart
             // 
             this.YearlyChart.BackColor = System.Drawing.Color.Transparent;
-            chartArea7.Name = "ChartArea1";
-            this.YearlyChart.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.YearlyChart.Legends.Add(legend7);
+            chartArea3.Name = "ChartArea1";
+            this.YearlyChart.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.YearlyChart.Legends.Add(legend3);
             resources.ApplyResources(this.YearlyChart, "YearlyChart");
             this.YearlyChart.Name = "YearlyChart";
             this.YearlyChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series7.ChartArea = "ChartArea1";
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.YearlyChart.Series.Add(series7);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.YearlyChart.Series.Add(series3);
             // 
             // tabPage1
             // 
@@ -549,17 +553,17 @@
             // 
             this.AllDataChart.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.AllDataChart, "AllDataChart");
-            chartArea8.Name = "ChartArea1";
-            this.AllDataChart.ChartAreas.Add(chartArea8);
+            chartArea4.Name = "ChartArea1";
+            this.AllDataChart.ChartAreas.Add(chartArea4);
             this.AllDataChart.Cursor = System.Windows.Forms.Cursors.Hand;
-            legend8.Name = "Legend1";
-            this.AllDataChart.Legends.Add(legend8);
+            legend4.Name = "Legend1";
+            this.AllDataChart.Legends.Add(legend4);
             this.AllDataChart.Name = "AllDataChart";
             this.AllDataChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series8.ChartArea = "ChartArea1";
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.AllDataChart.Series.Add(series8);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.AllDataChart.Series.Add(series4);
             // 
             // tabPage6
             // 
@@ -626,6 +630,18 @@
             resources.ApplyResources(this.tabControl, "tabControl");
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // ATtxt
+            // 
+            resources.ApplyResources(this.ATtxt, "ATtxt");
+            this.ATtxt.Name = "ATtxt";
             // 
             // SingleInverterForm
             // 
@@ -741,5 +757,7 @@
         private System.Windows.Forms.ComboBox DefaultQuestionCombo;
         private System.Windows.Forms.Button SaveChat;
         public System.Windows.Forms.ListView ListOfChat;
+        private System.Windows.Forms.TextBox ATtxt;
+        private System.Windows.Forms.Button button1;
     }
 }
