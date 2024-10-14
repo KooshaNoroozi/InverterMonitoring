@@ -429,13 +429,13 @@ namespace GetNum
                             foreach (ListViewItem selectedItem in ListOfInv.CheckedItems)
                             {
                                  
-                                string delQuery = "delete from DeviceTodayFeed where (SID=@SID AND date > (SELECT MIN(date) FROM devicetodayfeed));";
+                                string delQuery = "DELETE FROM DeviceTodayFeed WHERE (SID=@SID AND date > (SELECT MIN(date) FROM DeviceTodayFeed AS t WHERE t.SID = DeviceTodayFeed.SID)); ";
                                 using (SQLiteCommand delCmd = new SQLiteCommand(delQuery, connection))
                                 {
                                     delCmd.Parameters.AddWithValue("@SID", selectedItem.Text);
                                     delCmd.ExecuteNonQuery();
                                 }
-                                delQuery = "delete from devicefeedlog where  (SID=@SID AND date > (SELECT MIN(date) FROM devicefeedlog)) ;";
+                                delQuery = "DELETE FROM DeviceFeedlog WHERE (SID=@SID AND date > (SELECT MIN(date) FROM DeviceFeedlog AS t WHERE t.SID = DeviceFeedlog.SID)); ";
                                 using (SQLiteCommand delCmd = new SQLiteCommand(delQuery, connection))
                                 {
                                     delCmd.Parameters.AddWithValue("@SID", selectedItem.Text);
@@ -458,6 +458,15 @@ namespace GetNum
                 }
 
             
+        }
+
+        private void chkSelectAll_CheckedChanged(object sender, EventArgs e)
+        {
+            bool isChecked = chkSelectAll.Checked;
+            foreach (ListViewItem item in ListOfInv.Items)
+            {
+                item.Checked = isChecked;
+            }
         }
     }
 }

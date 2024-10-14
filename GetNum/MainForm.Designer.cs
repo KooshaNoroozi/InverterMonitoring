@@ -39,6 +39,7 @@
             this.SearchBox = new System.Windows.Forms.TextBox();
             this.deleteinvBTN = new System.Windows.Forms.Button();
             this.ClearLogBTn = new System.Windows.Forms.Button();
+            this.chkSelectAll = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // HomeBTN
@@ -137,11 +138,23 @@
             this.ClearLogBTn.UseVisualStyleBackColor = true;
             this.ClearLogBTn.Click += new System.EventHandler(this.ClearLogBTn_Click);
             // 
+            // chkSelectAll
+            // 
+            this.chkSelectAll.AutoSize = true;
+            this.chkSelectAll.Location = new System.Drawing.Point(22, 64);
+            this.chkSelectAll.Name = "chkSelectAll";
+            this.chkSelectAll.Size = new System.Drawing.Size(70, 17);
+            this.chkSelectAll.TabIndex = 39;
+            this.chkSelectAll.Text = "Select All";
+            this.chkSelectAll.UseVisualStyleBackColor = true;
+            this.chkSelectAll.CheckedChanged += new System.EventHandler(this.chkSelectAll_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(986, 732);
+            this.Controls.Add(this.chkSelectAll);
             this.Controls.Add(this.ClearLogBTn);
             this.Controls.Add(this.deleteinvBTN);
             this.Controls.Add(this.SearchBox);
@@ -169,5 +182,6 @@
         private System.Windows.Forms.ImageList StatusIcon;
         private System.Windows.Forms.Button ClearLogBTn;
         public System.Windows.Forms.ListView ListOfInv;
+        private System.Windows.Forms.CheckBox chkSelectAll;
     }
 }
