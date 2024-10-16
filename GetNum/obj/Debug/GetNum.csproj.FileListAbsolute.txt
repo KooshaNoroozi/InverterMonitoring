@@ -45,3 +45,4 @@ C:\Users\Koosha\source\repos\GetNum\GetNum\bin\Debug\GetNum.exe.manifest
 C:\Users\Koosha\source\repos\GetNum\GetNum\bin\Debug\GetNum.application
 C:\Users\Koosha\source\repos\GetNum\GetNum\obj\Debug\GetNum.exe.manifest
 C:\Users\Koosha\source\repos\GetNum\GetNum\obj\Debug\GetNum.application
+C:\Users\Koosha\source\repos\GetNum\GetNum\obj\Debug\GetNum.BatchSMSForm.resources

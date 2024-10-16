@@ -21,9 +21,10 @@ namespace GetNum
         private Thread RunThread;
         public static Thread monitoringThread;
         private Thread ParseThread;
-        
+        static Random random = new Random();
         public string Buffer = null;
         public static int RefreshFlag = 0;
+        
         public MainForm()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace GetNum
             LoadData();
             ListOfInv.MouseDoubleClick += new MouseEventHandler(ListOfInv_MouseDoubleClick);
         }
+        
         private void UpdateListView()
         {
             if (ListOfInv.InvokeRequired)
@@ -59,6 +61,7 @@ namespace GetNum
                 SingleInverterForm.ShowDialog();
             }
         }
+
         public void LoadData()
         {
             ListOfInv.Items.Clear();//clearing previous list to creating new one
@@ -127,6 +130,7 @@ namespace GetNum
 
             }
         }
+        
         public  void InitializeListOfInverter()
         {
             
@@ -150,6 +154,7 @@ namespace GetNum
 
 
         }
+        
         private class ListViewItemComparer : IComparer
         {
             private readonly int columnIndex;
@@ -166,12 +171,6 @@ namespace GetNum
             }
         }
        
-       
-      
-       
-       
-        
-       
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
 
@@ -181,10 +180,12 @@ namespace GetNum
 
 
         }
+        
         private void SingleInverterForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             InitializeListOfInverter();
         }
+       
         private void LogOutBtn_Click(object sender, EventArgs e)
         {
             AuthenticationForm FrstPageFrom = new AuthenticationForm();
@@ -193,17 +194,13 @@ namespace GetNum
             this.Hide();
         }
        
-        
-       
-        
         private void RegisterBTN_Click(object sender, EventArgs e)
         {
             this.Hide();
             RegistrationForm RegistrationForm = new RegistrationForm();
             RegistrationForm.Show();
-           
-
         }
+        
         private void CmpBTN_Click(object sender, EventArgs e)
         {
             if (ListOfInv.CheckedItems.Count <2)
@@ -239,7 +236,6 @@ namespace GetNum
             CompInv.ShowDialog();
         }
 
-        static Random random = new Random();
         static int GetRandomNumber(int userInput)
         {
             // Ensure userInput is non-negative
@@ -253,6 +249,7 @@ namespace GetNum
 
             return result + 5000;
         }
+        
         public static string ConvertGregorianToSolar(DateTime gregorianDate)
         {
             PersianCalendar persianCalendar = new PersianCalendar();
@@ -262,7 +259,7 @@ namespace GetNum
 
             return $"{year}-{month:D2}-{day:D2}";
         }
-
+        
         private void Button1_Click(object sender, EventArgs e)
         {
             string connectionString = "Data Source=library.db;Version=3;";
@@ -345,11 +342,13 @@ namespace GetNum
 
             ListOfInv.EndUpdate();
         }
+        
         private void ListOfInv_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             ListOfInv.ListViewItemSorter = new ListViewItemComparer(e.Column);
             ListOfInv.Sort();
         }
+        
         private void DeleteinvBTN_Click(object sender, EventArgs e)
         {
             if (ListOfInv.CheckedItems.Count == 0)
@@ -409,6 +408,7 @@ namespace GetNum
             }
             
         }
+        
         private void ClearLogBTn_Click(object sender, EventArgs e)
         {
             
@@ -443,7 +443,7 @@ namespace GetNum
                                 }
                             }
                             InitializeListOfInverter();
-                            MessageBox.Show("Selected Inverters deleted successfully. ", "Confirmation!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Selected Inverters are now clear successfully. ", "Confirmation!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         catch (Exception ex)
                         {
@@ -467,6 +467,43 @@ namespace GetNum
             {
                 item.Checked = isChecked;
             }
+        }
+
+        private void BatchSMSBTN_Click_1(object sender, EventArgs e)
+        {
+            if (ListOfInv.CheckedItems.Count < 2)
+            {
+
+                MessageBox.Show("Please select at least 2 inverters....", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            int SID;
+            List<int> SidList = new List<int>();
+            string connectionString = "Data Source=library.db;Version=3;";
+            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string query = @"SELECT sid FROM DeviceInfoTable WHERE sid= @sid";
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    foreach (ListViewItem selectedItem in ListOfInv.CheckedItems)
+                    {
+                        command.Parameters.AddWithValue("@sid", selectedItem.Text);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                SID = int.Parse(reader["SID"].ToString());
+                                SidList.Add(SID);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+            BatchSMSForm BatchSMSForm = new BatchSMSForm(SidList);
+            BatchSMSForm.Show();
         }
     }
 }

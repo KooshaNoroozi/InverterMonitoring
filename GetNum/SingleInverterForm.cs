@@ -47,16 +47,35 @@ namespace GetNum
             ReadThread.IsBackground = true;
             ReadThread.Start();
         }
+       
         private void InitializeSerialPort()
         {
-            _serialPort = new SerialPort("COM3"); // Replace with your COM port
+            _serialPort = new SerialPort($"COM{ListAvailablePorts()}"); // Replace with your COM port
             _serialPort.BaudRate = 9600;
             _serialPort.Parity = Parity.None;
             _serialPort.StopBits = StopBits.One;
             _serialPort.DataBits = 8;
             _serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPort_DataReceived);
         }
-       
+
+        private string ListAvailablePorts()
+        {
+            try
+            {
+                // Get all available COM ports
+                string[] ports = SerialPort.GetPortNames();
+                string myavport = ports[0];
+                return myavport[3].ToString();
+                // Display available ports in a Label or MessageBox for reference
+            }
+            catch (IndexOutOfRangeException c)
+            {
+                MessageBox.Show(c.Message);
+                return "";
+            }
+
+        }
+
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string data = _serialPort.ReadExisting();
@@ -69,6 +88,7 @@ namespace GetNum
                 AnswerBox.Text= string.Join(Environment.NewLine, ExtractCMTMessages(buffer));
             });
         }
+        
         private void ListenToComPort()
         {
             while (true)
@@ -78,6 +98,7 @@ namespace GetNum
                 Thread.Sleep(200);
             }
         }
+        
         public static List<string> ExtractCMTMessages(string input)
         {
             List<string> messages = new List<string>();
@@ -103,6 +124,7 @@ namespace GetNum
 
             return messages;
         }
+        
         public void OpeningPort()
         {
             if (!_serialPort.IsOpen)
@@ -120,6 +142,7 @@ namespace GetNum
             }
             
         }
+        
         private void ReadSms()
         {
 
@@ -146,6 +169,7 @@ namespace GetNum
             }
 
         }
+        
         public static string ConvertGregorianToSolar(DateTime gregorianDate)
         {
             PersianCalendar persianCalendar = new PersianCalendar();
@@ -220,12 +244,14 @@ namespace GetNum
             InverterSimpleData_load();
             ListOfAllData_Load();
         }
+        
         private void ListOfAllData_Load()
         {
             InitializeListOfAllResponses();
             InitializeListOfChat();
 
         }
+        
         private class ListViewItemComparer : IComparer
         {
             private readonly int columnIndex;
@@ -241,6 +267,7 @@ namespace GetNum
                     ((ListViewItem)y).SubItems[columnIndex].Text);
             }
         }
+        
         private void InitializeListOfChat()
         {
 
@@ -260,6 +287,7 @@ namespace GetNum
 
             LoadChatData();
         }
+        
         private void InitializeListOfAllResponses()
         {
             //  ListOfAllresponse = new FilterableListView();
@@ -279,6 +307,7 @@ namespace GetNum
 
             LoadListData();
         }
+        
         private void LoadChatData()
         {
             ListOfChat.Items.Clear();
@@ -309,6 +338,7 @@ namespace GetNum
 
 
         }
+        
         private void LoadListData()
         {
             ListOfAllresponse.Items.Clear();
@@ -364,6 +394,7 @@ namespace GetNum
             addressLabel.Text = Address;
             OwnerphoneLabel.Text = OwnerPhone;
         }
+        
         private void FirstLoadGraph()
         {
             AllDataChartLoad();
@@ -373,6 +404,7 @@ namespace GetNum
 
 
         }
+        
         private void DrawYearlyGraphs(string selectedOption)
         {
 
@@ -434,6 +466,7 @@ namespace GetNum
             }
             YearlyChartLoad(oneyeararr);
         }
+        
         private void Yearpicker_ValueChanged(object sender, EventArgs e)
         {
           
@@ -472,6 +505,7 @@ namespace GetNum
             YearlyChart.Invalidate();
 
         }
+        
         private void DrawMonthlyGraphs(string selectedOption)
         {
 
@@ -613,11 +647,13 @@ namespace GetNum
             }
             MonthlyChartLoad(oneMontharr);
         }
+        
         private void MonthYearPicker_ValueChanged(object sender, EventArgs e)
         {
             string selectedOption = MonthYearPicker.Value.ToString("yyyy-MM");
             DrawMonthlyGraphs(selectedOption);
         }
+        
         private void MonthlyChartLoad(int[] oneMontharr)
         {
 
@@ -651,6 +687,7 @@ namespace GetNum
 
 
         }
+        
         private void AllDataChartLoad()
         {
             // Clear any existing series
@@ -691,6 +728,7 @@ namespace GetNum
             // Show the chart
             AllDataChart.Invalidate();
         }
+        
         private void MakeListBTN_Click(object sender, EventArgs e)
         {
             ExportList.Items.Clear();
@@ -719,6 +757,7 @@ namespace GetNum
                 return;
             }
         }
+        
         private void ShowMonthlyList()
         {
             ExportList.View = View.Details;
@@ -777,6 +816,7 @@ namespace GetNum
             }
 
         }
+        
         private void ShowDailyList()
         {
             ExportList.View = View.Details;
@@ -809,6 +849,7 @@ namespace GetNum
             }
 
         }
+        
         private void ShowYearlyList()
         {
             ExportList.View = View.Details;
@@ -863,6 +904,7 @@ namespace GetNum
             }
 
         }
+        
         private void EditInfoBTN_Click(object sender, EventArgs e)
         {
             //hiding labels
@@ -891,6 +933,7 @@ namespace GetNum
             ownerPhonebox.Text = OwnerphoneLabel.Text;
             addressbox.Text = addressLabel.Text;
         }
+        
         private void CancelEditing()
         {
             //show labels
@@ -911,10 +954,12 @@ namespace GetNum
             ConfirmBTN.Visible = false;
             CancelBTN.Visible = false;
         }
+        
         private void CancelBTN_Click(object sender, EventArgs e)
         {
             CancelEditing();
         }
+        
         private void ConfirmBTN_Click(object sender, EventArgs e)
         {
             string connectionString = "Data Source=library.db;Version=3;";
@@ -997,33 +1042,36 @@ namespace GetNum
             ConfirmBTN.Visible = false;
             CancelBTN.Visible = false;
         }
+        
         private void FromDatePicker_ValueChanged(object sender, EventArgs e)
         {
             FromDatePicker.MaxDate = ToDatePicker.Value;
             ToDatePicker.MinDate = FromDatePicker.Value;
         }
+        
         private void ToDatePicker_ValueChanged(object sender, EventArgs e)
         {
             FromDatePicker.MaxDate = ToDatePicker.Value;
             ToDatePicker.MinDate = FromDatePicker.Value;
         }
+        
         private void FromMonthPicker_ValueChanged(object sender, EventArgs e)
         {
             FromMonthPicker.MaxDate = ToMonthPicker.Value;
             ToMonthPicker.MinDate = FromMonthPicker.Value;
         }
+        
         private void ToMonthPicker_ValueChanged(object sender, EventArgs e)
         {
             FromMonthPicker.MaxDate = ToMonthPicker.Value;
             ToMonthPicker.MinDate = FromMonthPicker.Value;
         }
+        
         private void FromYearPicker_ValueChanged(object sender, EventArgs e)
         {
             FromYearPicker.MaxDate = ToYearPicker.Value;
             ToYearPicker.MinDate = FromYearPicker.Value;
         }
-
-       
 
         private void ListOfAllresponse_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -1060,9 +1108,6 @@ namespace GetNum
             ListOfAllresponse.EndUpdate();
         }
 
-        
-        
-
         private void SndMsgBtn_Click_1(object sender, EventArgs e)
         {
             Question = SndBox.Text;
@@ -1091,8 +1136,6 @@ namespace GetNum
             SndBox.Clear();
         }
 
-        
-
         private void SingleInverterForm_Load(object sender, EventArgs e)
         {
             
@@ -1103,6 +1146,7 @@ namespace GetNum
             ReadSms();
             InitializeComboBox();
         }
+        
         private void InitializeComboBox()
         {
             DefaultQuestionCombo.Items.Add("سایر");
@@ -1119,7 +1163,6 @@ namespace GetNum
             DefaultQuestionCombo.SelectedIndex = 0;
         }
         
-
         private void DefaultQuestionCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (DefaultQuestionCombo.SelectedIndex == 0)
@@ -1251,18 +1294,21 @@ namespace GetNum
             
 
         }
+        
         private void FromPicker_ValueChanged(object sender, EventArgs e)
         {
             FromPicker.MaxDate = ToPicker.Value;
             ToPicker.MinDate = FromPicker.Value;
             AllDataChartLoad();
         }
+        
         private void ToPicker_ValueChanged(object sender, EventArgs e)
         {
             FromPicker.MaxDate = ToPicker.Value;
             ToPicker.MinDate = FromPicker.Value;
             AllDataChartLoad();
         }
+        
         private void TotalChartLoad()
         {
            
@@ -1335,8 +1381,7 @@ namespace GetNum
 
 
         }
-        
-        
+                
     }
     
 }

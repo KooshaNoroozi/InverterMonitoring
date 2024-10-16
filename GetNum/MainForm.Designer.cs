@@ -40,11 +40,12 @@
             this.deleteinvBTN = new System.Windows.Forms.Button();
             this.ClearLogBTn = new System.Windows.Forms.Button();
             this.chkSelectAll = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // HomeBTN
             // 
-            this.HomeBTN.Location = new System.Drawing.Point(398, 22);
+            this.HomeBTN.Location = new System.Drawing.Point(327, 22);
             this.HomeBTN.Name = "HomeBTN";
             this.HomeBTN.Size = new System.Drawing.Size(75, 23);
             this.HomeBTN.TabIndex = 27;
@@ -58,7 +59,7 @@
             // 
             // RegisterBTN
             // 
-            this.RegisterBTN.Location = new System.Drawing.Point(212, 22);
+            this.RegisterBTN.Location = new System.Drawing.Point(184, 22);
             this.RegisterBTN.Name = "RegisterBTN";
             this.RegisterBTN.Size = new System.Drawing.Size(137, 23);
             this.RegisterBTN.TabIndex = 31;
@@ -97,7 +98,7 @@
             // 
             // CmpBTN
             // 
-            this.CmpBTN.Location = new System.Drawing.Point(503, 22);
+            this.CmpBTN.Location = new System.Drawing.Point(408, 22);
             this.CmpBTN.Name = "CmpBTN";
             this.CmpBTN.Size = new System.Drawing.Size(114, 23);
             this.CmpBTN.TabIndex = 33;
@@ -130,7 +131,7 @@
             // 
             // ClearLogBTn
             // 
-            this.ClearLogBTn.Location = new System.Drawing.Point(682, 22);
+            this.ClearLogBTn.Location = new System.Drawing.Point(805, 22);
             this.ClearLogBTn.Name = "ClearLogBTn";
             this.ClearLogBTn.Size = new System.Drawing.Size(75, 23);
             this.ClearLogBTn.TabIndex = 38;
@@ -149,11 +150,22 @@
             this.chkSelectAll.UseVisualStyleBackColor = true;
             this.chkSelectAll.CheckedChanged += new System.EventHandler(this.chkSelectAll_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(528, 22);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.TabIndex = 40;
+            this.button1.Text = "Send Batch SMS";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.BatchSMSBTN_Click_1);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(986, 732);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.chkSelectAll);
             this.Controls.Add(this.ClearLogBTn);
             this.Controls.Add(this.deleteinvBTN);
@@ -183,5 +195,6 @@
         private System.Windows.Forms.Button ClearLogBTn;
         public System.Windows.Forms.ListView ListOfInv;
         private System.Windows.Forms.CheckBox chkSelectAll;
+        private System.Windows.Forms.Button button1;
     }
 }

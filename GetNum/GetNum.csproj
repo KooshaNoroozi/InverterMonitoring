@@ -154,6 +154,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BatchSMSForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BatchSMSForm.Designer.cs">
+      <DependentUpon>BatchSMSForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CompInv.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +192,9 @@
     <Compile Include="SingleInverterForm.Designer.cs">
       <DependentUpon>SingleInverterForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="BatchSMSForm.resx">
+      <DependentUpon>BatchSMSForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CompInv.resx">
       <DependentUpon>CompInv.cs</DependentUpon>
     </EmbeddedResource>
